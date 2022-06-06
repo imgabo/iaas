@@ -1,0 +1,52 @@
+<div class="container min-vh-100 flex-grow-1 container-p-y ">
+  <div class="row d-flex align-items-center justify-content-sm-center h-100">
+    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 py-5">
+     <div class="my-5 card shadow-lg">
+          <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Acceder</h1>
+            <form  (ngSubmit)="onSubmit()"  [formGroup]="loginForm">
+              <div class="mb-3">
+                <label class="mb-2 text-muted" for="nombreUsuario">Nombre de Usuario</label>
+                <input id="nombreUsuario" type="email" class="form-control" formControlName="nombreUsuario"  required autofocus>
+                <div class="invalid-feedback">
+                  Email is invalid
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  <label class="text-muted" for="password">Contraseña</label>
+                  <a href="forgot.html" class="float-end">
+                    Contraseña Olvidada?
+                  </a>
+                </div>
+                <input id="password" type="password" class="form-control" formControlName="password" name="password" required>
+                <div class="invalid-feedback">
+                  Password is required
+                </div>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                  Acceder
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer py-3 border-0">
+            <div class="text-center">
+              No tienes una cuenta? <a [routerLink]="['/sign-up']" class="text-dark">Crear Una</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+

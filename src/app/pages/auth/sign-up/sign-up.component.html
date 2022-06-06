@@ -1,0 +1,71 @@
+<div class="container min-vh-100  flex-grow-1 container-p-y">
+  <div class="row d-flex align-items-center justify-content-sm-center">
+    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+      <div class="card shadow-lg mt-5">
+        <div class="card-body p-5">
+          <h1 class="fs-4 card-title fw-bold mb-4">Registro</h1>
+          <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+            <div class="mb-3">
+              <label class="mb-2 text-muted" for="name">Nombre</label>
+              <input id="name" type="text" class="form-control" formControlName="nombre" value="" required autofocus>
+              <div class="invalid-feedback">
+                Name is required
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="mb-2 text-muted" for="lastname">Apellido</label>
+              <input id="lastname" type="text" class="form-control" formControlName="apellido" value="" required
+                autofocus>
+              <div class="invalid-feedback">
+                Name is required
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="mb-2 text-muted" for="username">Nombre de Usuario</label>
+              <input id="username" type="text" class="form-control" formControlName="nombreUsuario" value="" required
+                autofocus>
+              <div class="invalid-feedback">
+                Name is required
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="mb-2 text-muted" for="email">Correo Electronico</label>
+              <input id="email" type="email" class="form-control" formControlName="email" value="" required>
+              <div class="invalid-feedback">
+                Email is invalid
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="mb-2 text-muted" for="password">Contraseña</label>
+              <input id="password" type="password" class="form-control" formControlName="password" required>
+              <div class="invalid-feedback">
+                Password is required
+              </div>
+            </div>
+
+            <p class="form-text text-muted mb-3">
+              Una vez registrado deberas ser aprobado por un administrador.
+            </p>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary ">
+                Registrarme
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer py-3 border-0">
+          <div class="text-center">
+            Ya tienes una cuenta? <a [routerLink]="['/sign-in']" class="text-dark">Iniciar Sesion</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5 text-muted">
+        Copyright &copy; 2022 &mdash; Sistema IAAS
+      </div>
+    </div>
+  </div>
+</div>
