@@ -10,16 +10,22 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from '@shared/header/header.module';
 
 import { LeftpanelModule } from '@shared/leftpanel/leftpanel.module';
+import { DataTablesModule } from 'angular-datatables';
+import { UserlistComponent } from './pages/users/userlist/userlist.component';
+import { NewusersComponent } from './pages/users/newusers/newusers.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserlistComponent,
+    NewusersComponent,
 
   ],
   imports: [
     ToastrModule.forRoot(),
+    DataTablesModule.forRoot(),
     HttpClientModule,
     BrowserModule,
     LeftpanelModule,

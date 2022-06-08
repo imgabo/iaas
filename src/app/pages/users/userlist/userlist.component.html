@@ -1,0 +1,40 @@
+<div class="card shadow mb-4 ">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table  datatable  [dtOptions]="opciones"  [dtTrigger]="dtTrigger"class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                        
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                            <td>{{user.id}}</td>
+                            <td>{{user.nombre}}</td>
+                            <td>{{user.apellido}}</td>
+                            <td>{{user.email}}</td>
+
+                            <td class="d-flex justify-content-center"><button class="btn btn-success ">Editar</button><button class="btn btn-primary mx-1">Eliminar</button> <button (click)="setStatus(user)" [ngClass]="user.whitelist.status ? 'btn-danger' : 'btn-success'" class="btn">{{user.whitelist.status ? 'Denegar' : 'Aprobar'}}</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

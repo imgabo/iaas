@@ -4,6 +4,7 @@ import {HttpClient } from '@angular/common/http'
 import { loginUsuario } from '@auth/models/login-usuario.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NuevoUsario } from '@auth/models/registro-usuario.interface';
+import { User } from '../pages/users/models/user.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,9 @@ export class AuthService {
   authURL = environment.authUrl;
   constructor(private httpClient: HttpClient) { }
 
+
+  
+  
   login(user : loginUsuario): Observable<any> {
     
     return this.httpClient.post<any>(this.authURL + 'login' , user);
