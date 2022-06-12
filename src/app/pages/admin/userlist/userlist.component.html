@@ -1,0 +1,29 @@
+<p-table [value]="users">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.nombre}}</td>
+            <td>{{user.apellido}}</td>
+            <td>{{user.email}}</td>
+            <td> 
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" ></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning  mr-2" ></button>
+              
+                <button *ngIf="!user.whitelist.status; else botonRechazar" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success" (click)="setStatus(user)"></button>
+                <ng-template #botonRechazar >
+                    <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="setStatus(user)"></button>
+                </ng-template>
+                
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

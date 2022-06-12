@@ -1,0 +1,78 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid">
+            <h5>Datos Paciente</h5>
+            <hr>
+            <form class="p-fluid p-formgrid grid mt-5" >
+                <div class="field col-12 md:col-6 " >
+                    <label htmlFor="rut">Rut</label>
+                    <input pInputText id="rut" type="text" />
+                </div>
+                <div class="field col-12 md:col-6">
+					<label htmlFor="nombre">Nombre</label>
+					<input pInputText id="nombre" type="text" />
+				</div>
+				<div class="field col-12 md:col-6">
+					<label htmlFor="segundo_nombre">Segundo Nombre</label>
+					<input pInputText id="segundo_nombre" type="text" />
+				</div>
+                <hr>
+                <div class="field col-12 md:col-6">
+					<label htmlFor="apellido_paterno">Apellido Paterno</label>
+					<input pInputText id="apellido_paterno" type="text" />
+				</div>
+                <div class="field col-12 md:col-6">
+					<label htmlFor="apellido_materno">Apellido Materno</label>
+					<input pInputText id="apellido_materno" type="text" />
+				</div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="edad">Edad</label>
+                    <p-inputNumber  inputId="edad" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" ></p-inputNumber>
+                </div>
+
+                <div class="field col-12 md:col-6 ">
+                    <label htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
+                    <p-calendar  [showIcon]="true" inputId="fecha_nacimiento"></p-calendar>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="sexo">Sexo</label>
+                    <p-dropdown [options]="generos" placeholder="Selecciona el sexo" optionLabel="name" [showClear]="true"></p-dropdown>
+                </div>
+                
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="fecha_hospitalizacion">Fecha de Hospitalizacion</label>
+                    <p-calendar  [showIcon]="true"  [showTime]="true" inputId="fecha_hospitalizacion"></p-calendar>
+                </div>
+
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="servicio_ingreso">Servicio de Ingreso</label>
+                    <p-dropdown [options]="servicios" placeholder="Selecciona el servicio de ingreso" optionLabel="nombre" [showClear]="true"></p-dropdown>
+                </div>
+
+                <div class="field col-12 md:col-12">
+                    <label htmlFor="servicio_actual">Servicio Actual</label>
+                    <p-dropdown [options]="servicios" placeholder="Selecciona el servicio actual" optionLabel="nombre" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="col-12 md:col-12 my-4">
+                    <h5 >Datos Paciente</h5>
+                    <hr>
+                </div>
+                
+                
+                <div class="field col-12 md:col-6 " >
+                    
+                    <label htmlFor="rut">Factores de Riesgo</label>
+                    <input pInputText id="rut" type="text" />
+                </div>
+                <div class="col-12  ">
+                   
+                    <p-button label="Ingresar Paciente" icon="pi pi-check" iconPos="right" class=""></p-button>
+                  
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
