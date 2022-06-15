@@ -1,0 +1,73 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid">
+            <h5>Factores Riesgo</h5>
+            <hr>
+            <form class="p-fluid p-formgrid grid "  [formGroup]="factoresRiesgoForm">
+                <div class="field col-12 md:col-6 " >
+                    <span class="p-float-label mt-5">
+                        <input id="tipo" formGroupName="tipo" type="text" pInputText> 
+                        <label for="tipo">Tipo</label>
+                    </span>
+                </div>
+                <div class="field col-12 md:col-6 " >
+                    <div class="p-inputgroup mt-5">
+                        <span class="p-float-label">
+                            <input id="descripcion" formGroupName="descripcion" type="text" pInputText> 
+                            <label for="descripcion">Descripcion</label>
+                        </span>
+                         
+                    </div>
+                </div>
+                <div class="field col-12 md:col-3 md:col-offset-4 mt-3">
+                    <p-button  label="Agregar" styleClass="p-button-success" icon="pi pi-plus"></p-button>     
+                </div>
+            </form>
+        </div>
+        <div class="card">
+            <p-table [value]="factoresRiesgo" dataKey="id" editMode="row" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Descripcion/th>
+                        <th style="width:8rem"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-factor let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="factor">
+                        <td>
+                            {{factor.id}}
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="factor.tipo" required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{factor.tipo}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="factor.descripcion">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{factor.descripcion }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(factor)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(factor)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(factor, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            
+        </div>
+    </div>
+</div>

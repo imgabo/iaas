@@ -26,6 +26,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ServiciosComponent } from './pages/admin/servicios/servicios.component';
+import { FactoresRiesgoComponent } from './pages/admin/factores-riesgo/factores-riesgo.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ServiciosComponent } from './pages/admin/servicios/servicios.component'
     MenuItemComponent,
     UserlistComponent,
     PacientesComponent,
-    ServiciosComponent
+    ServiciosComponent,
+    FactoresRiesgoComponent
 
   ],
   imports: [

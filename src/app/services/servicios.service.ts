@@ -18,7 +18,7 @@ export class ServiciosService {
 
 
   addServicio(servicio : Servicios): Observable<any> {
-    console.log(servicio)
+   
     return this.http.post<any>(this.serviciosUrl + 'nuevo', servicio);
   }
 

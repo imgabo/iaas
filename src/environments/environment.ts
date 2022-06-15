@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   authUrl : 'http://localhost:8080/auth/',
   statusUrl : 'http://localhost:8080/user/',
-  servicioURL : 'http://localhost:8080/servicios/'
+  servicioURL : 'http://localhost:8080/servicios/',
+  factoresRiesgosURL : 'http://localhost:8080/factoresriesgo/'
 };
 
 /*
