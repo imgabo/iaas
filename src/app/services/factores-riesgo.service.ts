@@ -27,5 +27,8 @@ export class FactoresRiesgoService {
   }
 
   //updatear factor de riesgo()
+  updateFactorRiesgo( factor : FactorRiesgo, factorNuevo : FactorRiesgo): Observable<any>{
+    return this.http.
+  }
 
 }
