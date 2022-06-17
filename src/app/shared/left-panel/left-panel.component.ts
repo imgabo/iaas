@@ -72,9 +72,9 @@ export class LeftPanelComponent implements OnInit {
           },
 
           {
-            label: 'Factores Riesgo',
+            label: 'DIP',
             icon: 'pi pi-fw pi-plus',
-            routerLink: ['/home/factores-riesgo'],
+            routerLink: ['/home/dip'],
           },
         ],
       },

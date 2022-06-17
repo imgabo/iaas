@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FactoresRiesgoComponent } from '../admin/factores-riesgo/factores-riesgo.component';
+import { DipComponent } from '../admin/dip/dip.component';
+
 import { ServiciosComponent } from '../admin/servicios/servicios.component';
 import { UserlistComponent } from '../admin/userlist/userlist.component';
 import { PacientesComponent } from '../usuario/pacientes/pacientes.component';
@@ -27,9 +28,10 @@ const routes: Routes = [{
   component: ServiciosComponent
 },
 {
-  path: 'factores-riesgo',
-  component: FactoresRiesgoComponent
-}
+  path: 'dip',
+  component: DipComponent
+},
+
 ] ;
 
 @NgModule({
