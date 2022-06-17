@@ -76,6 +76,18 @@ export class LeftPanelComponent implements OnInit {
             icon: 'pi pi-fw pi-plus',
             routerLink: ['/home/dip'],
           },
+
+          {
+            label: 'Procedimientos Cirugia',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: ['/home/procedimientos-cirugia'],
+          },
+
+          {
+            label: 'Tipo Heridas',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: ['/home/tipo-heridas'],
+          },
         ],
       },
     ];

@@ -7,7 +7,9 @@ export const environment = {
   authUrl : 'http://localhost:8080/auth/',
   statusUrl : 'http://localhost:8080/user/',
   servicioURL : 'http://localhost:8080/servicios/',
-  dipURL : 'http://localhost:8080/dip/'
+  dipURL : 'http://localhost:8080/dip/',
+  procedimientosCirugiasURL : 'http://localhost:8080/procedimientoscirugias/',
+  tipoHeridasURL : 'http://localhost:8080/tipoheridas/'
 };
 
 /*

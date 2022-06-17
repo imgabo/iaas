@@ -1,13 +1,13 @@
 <div class="grid">
     <div class="col-12">
         <div class="card p-fluid">
-            <h5>DIP</h5>
+            <h5>Tipo de Heridas</h5>
             <hr>
-            <form class="p-fluid p-formgrid grid " (ngSubmit)="onSubmit()"  [formGroup]="dipForm">
+            <form class="p-fluid p-formgrid grid " (ngSubmit)="onSubmit()"  [formGroup]="tipoHeridaForm">
                 <div class="field col-12 md:col-6 " >
-                    <label htmlFor="dip">Agregar Dip</label>
+                    <label htmlFor="herida">Agregar Tipo de Herida</label>
                     <div class="p-inputgroup">
-                        <input pInputText id="dip" formControlName="nombre"  type="text"/>
+                        <input pInputText id="herida" formControlName="nombre"  type="text"/>
                         <button type="submit" pButton pRipple icon="pi pi-plus" styleClass="p-button-warn"></button>      
                     </div>
                 </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="card">
          
-                <p-table [value]="dips" dataKey="id" editMode="row" responsiveLayout="scroll">
+                <p-table [value]="tipoHeridas" dataKey="id" editMode="row" responsiveLayout="scroll">
                     <ng-template pTemplate="header">
                         <tr>
                             <th>ID</th>
@@ -23,29 +23,29 @@
                             <th style="width:8rem">Acciones</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-dip let-editing="editing" let-ri="rowIndex">
-                        <tr [pEditableRow]="dip">
+                    <ng-template pTemplate="body" let-herida let-editing="editing" let-ri="rowIndex">
+                        <tr [pEditableRow]="herida">
                             <td>
                                 <p-cellEditor>
                                     <ng-template pTemplate="output">
-                                        {{dip.id}}
+                                        {{herida.id}}
                                     </ng-template>
                                 </p-cellEditor>
                             </td>
                             <td>
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <input pInputText type="text" [(ngModel)]="dip.nombre" required>
+                                        <input pInputText type="text" [(ngModel)]="herida.nombre" required>
                                     </ng-template>
                                     <ng-template pTemplate="output">
-                                        {{dip.nombre}}
+                                        {{herida.nombre}}
                                     </ng-template>
                                 </p-cellEditor>
                             </td>
                             <td style="text-align:center">
-                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(dip)" class="p-button-rounded p-button-text"></button>
-                                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(dip)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(dip, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(herida)" class="p-button-rounded p-button-text"></button>
+                                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(herida)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(herida, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
                             </td>
                         </tr>
                     </ng-template>

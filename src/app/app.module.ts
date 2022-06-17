@@ -27,6 +27,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ServiciosComponent } from './pages/admin/servicios/servicios.component';
 import { DipComponent } from './pages/admin/dip/dip.component';
+import { ProcedimientosCirugiasComponent } from './pages/admin/procedimientos-cirugias/procedimientos-cirugias.component';
+import { TipoHeridasComponent } from './pages/admin/tipo-heridas/tipo-heridas.component';
 
 
 
@@ -40,6 +42,8 @@ import { DipComponent } from './pages/admin/dip/dip.component';
     PacientesComponent,
     ServiciosComponent,
     DipComponent,
+    ProcedimientosCirugiasComponent,
+    TipoHeridasComponent,
 
 
   ],

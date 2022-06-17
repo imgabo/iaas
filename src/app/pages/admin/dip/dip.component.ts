@@ -83,9 +83,9 @@ export class DipComponent implements OnInit {
     }
   }
 
-  onRowEditCancel(dip : Dip, index : number) {
-    this.dipSvc.deleteDip(dip.id).subscribe((data) =>{
-      this.cargarDips()
+  onRowEditCancel(dip: Dip, index: number) {
+    this.dipSvc.deleteDip(dip.id).subscribe((data) => {
+      this.dips.splice(index, 1);
       delete this.cloneDips[dip.id];
       this.toastrService.info('DIP Eliminado', 'Advertencia', {
         timeOut: 3000,
@@ -94,5 +94,4 @@ export class DipComponent implements OnInit {
       });
     });
   }
-
 }
