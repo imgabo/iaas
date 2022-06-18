@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DipComponent } from '../admin/dip/dip.component';
+import { LocalizacionesComponent } from '../admin/localizaciones/localizaciones.component';
+import { MicroorganismosComponent } from '../admin/microorganismos/microorganismos.component';
 import { ProcedimientosCirugiasComponent } from '../admin/procedimientos-cirugias/procedimientos-cirugias.component';
 
 import { ServiciosComponent } from '../admin/servicios/servicios.component';
@@ -41,6 +43,16 @@ const routes: Routes = [{
   path: 'tipo-heridas',
   component: TipoHeridasComponent
 },
+{
+  path: 'microorganismos',
+  component: MicroorganismosComponent
+},
+
+{
+  path: 'localizaciones',
+  component: LocalizacionesComponent
+},
+
 
 
 ] ;

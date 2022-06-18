@@ -9,7 +9,9 @@ export const environment = {
   servicioURL : 'http://localhost:8080/servicios/',
   dipURL : 'http://localhost:8080/dip/',
   procedimientosCirugiasURL : 'http://localhost:8080/procedimientoscirugias/',
-  tipoHeridasURL : 'http://localhost:8080/tipoheridas/'
+  tipoHeridasURL : 'http://localhost:8080/tipoheridas/',
+  microorganismosURL : 'http://localhost:8080/microorganismos/',
+  localizacionesURL : 'http://localhost:8080/localizaciones/'
 };
 
 /*
