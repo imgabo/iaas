@@ -100,6 +100,12 @@ export class LeftPanelComponent implements OnInit {
             icon: 'pi pi-fw pi-plus',
             routerLink: ['/home/localizaciones'],
           },
+
+          {
+            label: 'Iarepis',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: ['/home/iarepis'],
+          },
         ],
       },
     ];

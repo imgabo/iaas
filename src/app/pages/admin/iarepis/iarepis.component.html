@@ -1,0 +1,56 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid">
+            <h5>Iarepis</h5>
+            <hr>
+            <form class="p-fluid p-formgrid grid " (ngSubmit)="onSubmit()"  [formGroup]="nuevoIarepisForm">
+                <div class="field col-12 md:col-6 " >
+                    <label htmlFor="iarepi">Agregar Iarepis</label>
+                    <div class="p-inputgroup">
+                        <input pInputText id="iarepi" formControlName="nombre"  type="text"/>
+                        <button type="submit" pButton pRipple icon="pi pi-plus" styleClass="p-button-warn"></button>      
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card">
+         
+                <p-table [value]="iarepis" dataKey="id" editMode="row" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th style="width:8rem">Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-iarepi let-editing="editing" let-ri="rowIndex">
+                        <tr [pEditableRow]="iarepi">
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="output">
+                                        {{iarepi.id}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="text" [(ngModel)]="iarepi.nombre" required>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{iarepi.nombre}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td style="text-align:center">
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(iarepi)" class="p-button-rounded p-button-text"></button>
+                                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(iarepi)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(iarepi, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            
+        </div>
+    </div>
+</div>

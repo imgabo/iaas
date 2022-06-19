@@ -9,6 +9,7 @@ import { Microorganismos } from '../pages/admin/microorganismos/models/microorga
 })
 export class MicroorganismosService {
   microorganismosURL = environment.microorganismosURL;
+  
   constructor(private readonly http : HttpClient) { }
 
     //obtener todos

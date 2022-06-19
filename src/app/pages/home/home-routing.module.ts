@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DipComponent } from '../admin/dip/dip.component';
+import { IarepisComponent } from '../admin/iarepis/iarepis.component';
 import { LocalizacionesComponent } from '../admin/localizaciones/localizaciones.component';
 import { MicroorganismosComponent } from '../admin/microorganismos/microorganismos.component';
 import { ProcedimientosCirugiasComponent } from '../admin/procedimientos-cirugias/procedimientos-cirugias.component';
@@ -51,6 +52,11 @@ const routes: Routes = [{
 {
   path: 'localizaciones',
   component: LocalizacionesComponent
+},
+
+{
+  path: 'iarepis',
+  component: IarepisComponent
 },
 
 

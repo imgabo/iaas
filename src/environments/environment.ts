@@ -11,7 +11,8 @@ export const environment = {
   procedimientosCirugiasURL : 'http://localhost:8080/procedimientoscirugias/',
   tipoHeridasURL : 'http://localhost:8080/tipoheridas/',
   microorganismosURL : 'http://localhost:8080/microorganismos/',
-  localizacionesURL : 'http://localhost:8080/localizaciones/'
+  localizacionesURL : 'http://localhost:8080/localizaciones/',
+  iarepisURL : 'http://localhost:8080/iarepis/',
 };
 
 /*
