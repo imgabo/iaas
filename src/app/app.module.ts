@@ -32,6 +32,7 @@ import { TipoHeridasComponent } from './pages/admin/tipo-heridas/tipo-heridas.co
 import { MicroorganismosComponent } from './pages/admin/microorganismos/microorganismos.component';
 import { LocalizacionesComponent } from './pages/admin/localizaciones/localizaciones.component';
 import { IarepisComponent } from './pages/admin/iarepis/iarepis.component';
+import { PaasComponent } from './pages/admin/paas/paas.component';
 
 
 
@@ -50,6 +51,7 @@ import { IarepisComponent } from './pages/admin/iarepis/iarepis.component';
     MicroorganismosComponent,
     LocalizacionesComponent,
     IarepisComponent,
+    PaasComponent,
 
 
   ],

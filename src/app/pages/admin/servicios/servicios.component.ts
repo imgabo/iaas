@@ -50,6 +50,7 @@ export class ServiciosComponent implements OnInit {
         }),
       complete: () => {
         this.cargarServicios();
+        this.serviciosForm.controls['nombre'].setValue('');
         this.toastrService.success('Servicio Creado con exito', 'Advertencia' , {
           timeOut: 3000,
           progressBar: true,

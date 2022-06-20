@@ -59,6 +59,7 @@ export class MicroorganismosComponent implements OnInit {
 
         complete: () => {
           this.cargarMicroorganismos() 
+          this.nuevoMicroorganismoForm.controls['nombre'].setValue('');
           this.toastrService.success(
             'Microorganismo Creado con Exito',
             'Advertencia',

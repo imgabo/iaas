@@ -13,6 +13,7 @@ export const environment = {
   microorganismosURL : 'http://localhost:8080/microorganismos/',
   localizacionesURL : 'http://localhost:8080/localizaciones/',
   iarepisURL : 'http://localhost:8080/iarepis/',
+  paasURL : 'http://localhost:8080/paas/',
 };
 
 /*

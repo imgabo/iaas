@@ -106,6 +106,12 @@ export class LeftPanelComponent implements OnInit {
             icon: 'pi pi-fw pi-plus',
             routerLink: ['/home/iarepis'],
           },
+
+          {
+            label: 'Paas',
+            icon: 'pi pi-fw pi-plus',
+            routerLink: ['/home/paas'],
+          },
         ],
       },
     ];
