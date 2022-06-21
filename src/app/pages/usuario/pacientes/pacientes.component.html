@@ -3,7 +3,7 @@
         <div class="card p-fluid">
             <h5>Datos Paciente</h5>
             <hr>
-            <form class="p-fluid p-formgrid grid mt-5"  [formGroup]="nuevoPacienteForm">
+            <form class="p-fluid p-formgrid grid mt-5" (ngSubmit)="onSubmit()" [formGroup]="nuevoPacienteForm">
                 <div class="field col-12 md:col-6 " >
                     <label htmlFor="rut">Rut</label>
                     <div class="p-inputgroup">
@@ -13,47 +13,47 @@
                 </div>
                 <div class="field col-12 md:col-6">
 					<label htmlFor="nombre">Nombre</label>
-					<input [disabled]="!valido" pInputText id="nombre" type="text" />
+					<input  pInputText id="nombre"  formControlName="nombre" type="text" />
 				</div>
 				<div class="field col-12 md:col-6">
 					<label htmlFor="segundo_nombre">Segundo Nombre</label>
-					<input [disabled]="!valido" pInputText id="segundo_nombre" type="text" />
+					<input  pInputText id="segundo_nombre" formControlName="segundo_nombre" type="text" />
 				</div>
                 <hr>
                 <div class="field col-12 md:col-6">
 					<label htmlFor="apellido_paterno">Apellido Paterno</label>
-					<input [disabled]="!valido" pInputText id="apellido_paterno" type="text" />
+					<input  pInputText id="apellido_paterno" formControlName="apellido_paterno" type="text" />
 				</div>
                 <div class="field col-12 md:col-6">
 					<label htmlFor="apellido_materno">Apellido Materno</label>
-					<input [disabled]="!valido" pInputText id="apellido_materno" type="text" />
+					<input  pInputText id="apellido_materno" formControlName="apellido_materno" type="text" />
 				</div>
                 <div class="field col-12 md:col-6">
                     <label htmlFor="edad">Edad</label>
-                    <p-inputNumber [disabled]="!valido"  inputId="edad" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" ></p-inputNumber>
+                    <p-inputNumber  formControlName="edad" inputId="edad" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" ></p-inputNumber>
                 </div>
 
                 <div class="field col-12 md:col-6 ">
                     <label htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
-                    <p-calendar [disabled]="!valido"  [showIcon]="true" inputId="fecha_nacimiento"></p-calendar>
+                    <p-calendar  formControlName="fecha_nacimiento"  dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_nacimiento"></p-calendar>
                 </div>
 
                 <div class="field col-12 md:col-6">
                     <label htmlFor="sexo">Sexo</label>
-                    <p-dropdown [disabled]="!valido" [options]="generos" placeholder="Selecciona el sexo" optionLabel="name" [showClear]="true"></p-dropdown>
+                    <p-dropdown  [options]="generos" optionValue="name" formControlName="sexo" placeholder="Selecciona el sexo" optionLabel="name" [showClear]="true"></p-dropdown>
                 </div>
                 
                 <div class="field col-12 md:col-6">
                     <label htmlFor="fecha_hospitalizacion">Fecha de Hospitalizacion</label>
-                    <p-calendar [disabled]="!valido"  [showIcon]="true"  [showTime]="true" inputId="fecha_hospitalizacion"></p-calendar>
+                    <p-calendar [showIcon]="true"  formControlName="fecha_hospitalizacion" dateFormat="dd/mm/yy" [showTime]="true" inputId="fecha_hospitalizacion"></p-calendar>
                 </div>
 
                 <div class="field col-12 md:col-6">
                     <label htmlFor="servicio_ingreso">Servicio de Ingreso</label>
-                    <p-dropdown [disabled]="!valido" [options]="servicios" placeholder="Selecciona el servicio de ingreso" optionLabel="nombre" [showClear]="true"></p-dropdown>
+                    <p-dropdown  [options]="servicios" formControlName="servicio_ingreso" optionValue="id" placeholder="Selecciona el servicio de ingreso" optionLabel="nombre" [showClear]="true"></p-dropdown>
                 </div>
                 <div class="col-12  md:col-4 md:col-offset-4 pt-5 ">
-                    <p-button [disabled]="!valido" label="Ingresar Paciente" icon="pi pi-check" iconPos="right" styleClass="p-button-success"></p-button>
+                    <p-button  type="submit" label="Ingresar Paciente" icon="pi pi-check" iconPos="right" styleClass="p-button-success"></p-button>
                 </div>
             </form>
         </div>
