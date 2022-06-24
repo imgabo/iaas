@@ -7,6 +7,10 @@ import { PacientesService } from 'src/app/services/pacientes.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { Servicios } from '../../admin/servicios/models/servicio.interface';
 import { PacienteInterface } from './models/paciente.interface';
+import { LazyLoadEvent } from 'primeng/api';
+
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-pacientes',
@@ -18,21 +22,24 @@ export class PacientesComponent implements OnInit {
   paciente !: PacienteInterface;
   datePipe : DatePipe = new DatePipe('en-US');
   nuevoPacienteForm = this.fb.group({
-    rut: ['231832785', [Validators.required, Validators.minLength(6)]],
-    nombre: ['gabriel', [Validators.required, Validators.minLength(6)]],
-    segundo_nombre: ['alfonso', [Validators.required, Validators.minLength(6)]],
-    apellido_paterno: ['martinez', [Validators.required, Validators.minLength(6)]],
-    apellido_materno: ['plaz', [Validators.required, Validators.minLength(6)]],
-    edad: ['23', [Validators.required, Validators.minLength(6)]],
-    sexo: ['', [Validators.required]],
-    fecha_nacimiento: ['', [Validators.required, Validators.minLength(6)]],
-    fecha_hospitalizacion: ['', [Validators.required, Validators.minLength(6)]],
-    servicio_ingreso: ['', [Validators.required, Validators.minLength(6)]],
+    rut: ['', [Validators.required, Validators.minLength(6)]],
+    nombre: [{value: '', disabled: this.valido ? 'true':'false' }, [  Validators.required, Validators.minLength(6)]],
+    segundo_nombre: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    apellido_paterno: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    apellido_materno: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    edad: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    sexo: [{value: '', disabled: true}, [Validators.required]],
+    fecha_nacimiento: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    fecha_hospitalizacion: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
+    servicio_ingreso: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
   });
 
   generos: any[] = [{ name: 'Masculino' }, { name: 'Femenino' }];
-  
+  loading!: boolean;
+  pacientes !: PacienteInterface[];
   servicios!: any[];
+  localDB !: PacienteInterface[];
+  totalRecords !: number;
   constructor(
     private readonly fb: FormBuilder,
     private readonly servicioSvc: ServiciosService,
@@ -42,7 +49,11 @@ export class PacientesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this
+    this.pacienteSvc.getPacientes().subscribe((data) =>{
+      this.localDB = data;
+      this.totalRecords = data.length;
+    })
+
     this.cargarServicios();
   }
 
@@ -69,7 +80,13 @@ export class PacientesComponent implements OnInit {
             positionClass: 'toast-top-right',
           });
         } else {
+          this.toastrService.success('Rut Valido', 'Advertencia', {
+            timeOut: 3000,
+            progressBar: true,
+            positionClass: 'toast-top-right',
+          });
           this.valido = true;
+          this.nuevoPacienteForm.enable();
           this.nuevoPacienteForm.controls['rut'].disable();
         }
     });
@@ -84,18 +101,32 @@ export class PacientesComponent implements OnInit {
   }
 
 
-  // AGREGAR PACIENTE 
+  cargarPacientes(event : LazyLoadEvent){
+    this.loading = true;
+    setTimeout(() =>{
+      if(this.localDB){
+        if (event.first !== undefined && event.rows !== undefined){
+          this.pacientes = this.localDB.slice(event.first, (event.first + event.rows));
+        }
+
+        this.loading=false
+      }
+    }, 1000);
+  }
+
+
+  // AGREGAR PACIENTE
   onSubmit () : void {
-    
-    
+
+
     this.paciente = this.nuevoPacienteForm.value;
-    console.log(this.paciente.servicio_ingreso);
-  
+
+
     this.paciente.fecha_nacimiento = this.datePipe.transform(this.paciente.fecha_nacimiento, 'yyyy-MM-dd')!;
     this.paciente.fecha_hospitalizacion = this.datePipe.transform(this.paciente.fecha_hospitalizacion, 'dd-MM-yyyy, h:mm a')!;
 
-   
-    
+
+
     this.pacienteSvc.create(this.paciente).subscribe({
       error: (e) =>
          { console.log(e)
@@ -117,5 +148,27 @@ export class PacientesComponent implements OnInit {
         },
     })
   }
+
+
+   // FUNCIONES DE LA TABLA PARA EXPORTAR //
+
+    exportExcel() {
+        import("xlsx").then(xlsx => {
+            const worksheet = xlsx.utils.json_to_sheet(this.pacientes);
+            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+            const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+            this.saveAsExcelFile(excelBuffer, "pacientes");
+        });
+    }
+
+    saveAsExcelFile(buffer: any, fileName: string): void {
+        let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        let EXCEL_EXTENSION = '.xlsx';
+        const data: Blob = new Blob([buffer], {
+            type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    }
+   // FIN DE LAS FUNCIONES DE LA TABLA PARA EXPORTAR //
 
 }

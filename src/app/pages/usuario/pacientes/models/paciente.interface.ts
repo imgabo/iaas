@@ -1,3 +1,5 @@
+import { Servicios } from "src/app/pages/admin/servicios/models/servicio.interface";
+
 export interface PacienteInterface {
     id : string,
     nombre : string,
@@ -9,6 +11,7 @@ export interface PacienteInterface {
     fecha_nacimiento : string,
     sexo : string,
     fecha_hospitalizacion : string,
-    servicio_ingreso : number,
+    servicioIngreso : Servicios,
+    servicioActual : Servicios
 
 }

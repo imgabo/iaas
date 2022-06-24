@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
     nombre : ['',[Validators.required, Validators.minLength(3),Validators.pattern('^[a-zA-Z]+([\\.:_\\-=!\\?]){0,5}([a-zA-Z0-9])+$')]],
     apellido : ['',[Validators.required, Validators.minLength(3),Validators.pattern('^[a-zA-Z]+([\\.:_\\-=!\\?]){0,5}([a-zA-Z0-9])+$')]],
     nombreUsuario : ['',[Validators.required, Validators.minLength(3),Validators.pattern('^[a-zA-Z]+([\\.:_\\-=!\\?]){0,5}([a-zA-Z0-9])+$')]],
-    email : ['',Validators.required, Validators.email],
+    email : ['',Validators.required],
     password : ['',[Validators.required, Validators.minLength(3)]],
   })
   constructor(private readonly fb : FormBuilder,
@@ -32,28 +32,28 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() : void {
     this.usuario = this.registerForm.value;
-    
+
     this.registroSvc.registro(this.usuario).subscribe({
-      error: (e) => 
+      error: (e) =>
         this.toastrService.error(e.error.error, 'Advertencia' , {
             timeOut: 3000,
             positionClass: 'toast-top-center',
-            
+
         }),
       complete: () => {
         this.toastrService.success('Usuario Creado Con Exito', 'Advertencia' , {
           timeOut: 3000,
           progressBar: true,
           positionClass: 'toast-top-center',
-        
+
         }),
         setTimeout(()=> {
           this.router.navigate(['/sign-in']);
         },3000)
       }
     });
-      
-   
+
+
   }
 
 }

@@ -47,7 +47,7 @@ export class LeftPanelComponent implements OnInit {
         ],
       },
       {
-        label: 'Informes',
+        label: 'Vigilancias',
         items: [
           {
             label: 'Pacientes',

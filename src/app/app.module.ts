@@ -76,8 +76,8 @@ import { PaasComponent } from './pages/admin/paas/paas.component';
     InputNumberModule,
     CalendarModule,
     DropdownModule,
-    MultiSelectModule
-    
+    MultiSelectModule,
+
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

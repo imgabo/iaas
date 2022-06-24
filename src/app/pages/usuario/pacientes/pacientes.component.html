@@ -1,61 +1,119 @@
 <div class="grid">
-    <div class="col-12">
-        <div class="card p-fluid">
-            <h5>Datos Paciente</h5>
-            <hr>
-            <form class="p-fluid p-formgrid grid mt-5" (ngSubmit)="onSubmit()" [formGroup]="nuevoPacienteForm">
-                <div class="field col-12 md:col-6 " >
-                    <label htmlFor="rut">Rut</label>
-                    <div class="p-inputgroup">
-                        <input  pInputText id="rut" type="text" formControlName="rut" />
-                        <button  type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-warn" (click)="validateRut()"></button>   
-                    </div>
-                </div>
-                <div class="field col-12 md:col-6">
-					<label htmlFor="nombre">Nombre</label>
-					<input  pInputText id="nombre"  formControlName="nombre" type="text" />
-				</div>
-				<div class="field col-12 md:col-6">
-					<label htmlFor="segundo_nombre">Segundo Nombre</label>
-					<input  pInputText id="segundo_nombre" formControlName="segundo_nombre" type="text" />
-				</div>
-                <hr>
-                <div class="field col-12 md:col-6">
-					<label htmlFor="apellido_paterno">Apellido Paterno</label>
-					<input  pInputText id="apellido_paterno" formControlName="apellido_paterno" type="text" />
-				</div>
-                <div class="field col-12 md:col-6">
-					<label htmlFor="apellido_materno">Apellido Materno</label>
-					<input  pInputText id="apellido_materno" formControlName="apellido_materno" type="text" />
-				</div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="edad">Edad</label>
-                    <p-inputNumber  formControlName="edad" inputId="edad" [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" ></p-inputNumber>
-                </div>
-
-                <div class="field col-12 md:col-6 ">
-                    <label htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
-                    <p-calendar  formControlName="fecha_nacimiento"  dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_nacimiento"></p-calendar>
-                </div>
-
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="sexo">Sexo</label>
-                    <p-dropdown  [options]="generos" optionValue="name" formControlName="sexo" placeholder="Selecciona el sexo" optionLabel="name" [showClear]="true"></p-dropdown>
-                </div>
-                
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="fecha_hospitalizacion">Fecha de Hospitalizacion</label>
-                    <p-calendar [showIcon]="true"  formControlName="fecha_hospitalizacion" dateFormat="dd/mm/yy" [showTime]="true" inputId="fecha_hospitalizacion"></p-calendar>
-                </div>
-
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="servicio_ingreso">Servicio de Ingreso</label>
-                    <p-dropdown  [options]="servicios" formControlName="servicio_ingreso" optionValue="id" placeholder="Selecciona el servicio de ingreso" optionLabel="nombre" [showClear]="true"></p-dropdown>
-                </div>
-                <div class="col-12  md:col-4 md:col-offset-4 pt-5 ">
-                    <p-button  type="submit" label="Ingresar Paciente" icon="pi pi-check" iconPos="right" styleClass="p-button-success"></p-button>
-                </div>
-            </form>
+  <div class="col-12">
+    <div class="card p-fluid">
+      <h5>Agregar Paciente</h5>
+      <hr>
+      <form class="p-fluid p-formgrid grid mt-5" (ngSubmit)="onSubmit()" [formGroup]="nuevoPacienteForm">
+        <div class="field col-12 md:col-6 ">
+          <label htmlFor="rut">Rut</label>
+          <div class="p-inputgroup">
+            <input pInputText id="rut" type="text" formControlName="rut" />
+            <button type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-warn"
+              (click)="validateRut()"></button>
+          </div>
         </div>
+        <div class="field col-12 md:col-6">
+          <label htmlFor="nombre">Nombre</label>
+          <input  pInputText id="nombre" formControlName="nombre" type="text" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label htmlFor="segundo_nombre">Segundo Nombre</label>
+          <input pInputText id="segundo_nombre" formControlName="segundo_nombre" type="text" />
+        </div>
+        <hr>
+        <div class="field col-12 md:col-6">
+          <label htmlFor="apellido_paterno">Apellido Paterno</label>
+          <input pInputText id="apellido_paterno" formControlName="apellido_paterno" type="text" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label htmlFor="apellido_materno">Apellido Materno</label>
+          <input pInputText id="apellido_materno" formControlName="apellido_materno" type="text" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label htmlFor="edad">Edad</label>
+          <p-inputNumber formControlName="edad" inputId="edad" [showButtons]="true" buttonLayout="horizontal"
+            spinnerMode="horizontal" decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
+        </div>
+
+        <div class="field col-12 md:col-6 ">
+          <label htmlFor="fecha_nacimiento">Fecha de Nacimiento</label>
+          <p-calendar formControlName="fecha_nacimiento" dateFormat="dd/mm/yy" [showIcon]="true"
+            inputId="fecha_nacimiento"></p-calendar>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label htmlFor="sexo">Sexo</label>
+          <p-dropdown [options]="generos" optionValue="name" formControlName="sexo" placeholder="Selecciona el sexo"
+            optionLabel="name" [showClear]="true"></p-dropdown>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label htmlFor="fecha_hospitalizacion">Fecha de Hospitalizacion</label>
+          <p-calendar [showIcon]="true" formControlName="fecha_hospitalizacion" dateFormat="dd/mm/yy" [showTime]="true"
+            inputId="fecha_hospitalizacion"></p-calendar>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label htmlFor="servicio_ingreso">Servicio de Ingreso</label>
+          <p-dropdown [options]="servicios" formControlName="servicio_ingreso" optionValue="id"
+            placeholder="Selecciona el servicio de ingreso" optionLabel="nombre" [showClear]="true"></p-dropdown>
+        </div>
+        <div class="col-12  md:col-4 md:col-offset-4 pt-5 ">
+          <p-button type="submit" label="Ingresar Paciente" icon="pi pi-check" iconPos="right"
+            styleClass="p-button-success"></p-button>
+        </div>
+      </form>
     </div>
+
+    <!-- LISTA DE PACIENTES !-->
+    <div class="card">
+      <h5>Lista de Pacientes</h5>
+      <hr>
+      <p-table [value]="pacientes" [lazy]="true" (onLazyLoad)="cargarPacientes($event)" responsiveLayout="scroll"
+              dataKey="id" [paginator]="true" [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+        <ng-template pTemplate="header" >
+          <tr>
+            <th>ID</th>
+            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon>
+            </th>
+            <th pSortableColumn="rut">Rut<p-sortIcon field="rut"></p-sortIcon>
+            </th>
+            <th pSortableColumn="segundo_nombre">Segundo Nombre<p-sortIcon field="segundo_nombre"></p-sortIcon>
+            </th>
+            <th pSortableColumn="apellido_paterno">Apellido Paterno<p-sortIcon field="apellido_paterno"></p-sortIcon>
+            </th>
+            <th pSortableColumn="edad">Edad<p-sortIcon field="edad"></p-sortIcon>
+            </th>
+            <th pSortableColumn="fecha_nacimiento">Fecha Nacimiento<p-sortIcon field="fecha_nacimiento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="sexo">Sexo<p-sortIcon field="sexo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="fecha_hospitalizacion">Fecha Hospitalziacion<p-sortIcon field="fecha_hospitalizacion">
+              </p-sortIcon>
+            </th>
+            <th pSortableColumn="servicioIngreso.nombre">Servicio Ingreso<p-sortIcon field="servicioIngreso.nombre">
+              </p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-paciente>
+          <tr>
+            <td>
+              {{paciente.id}}
+            </td>
+            <td>{{paciente.nombre}}</td>
+            <td>{{paciente.rut}}</td>
+            <td>{{paciente.segundo_nombre}}</td>
+            <td>{{paciente.apellido_paterno}}</td>
+            <td>{{paciente.edad}}</td>
+            <td>{{paciente.fecha_nacimiento}}</td>
+            <td>{{paciente.sexo}}</td>
+            <td>{{paciente.fecha_hospitalizacion}}</td>
+            <td>{{paciente.servicioIngreso.nombre}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
 </div>
