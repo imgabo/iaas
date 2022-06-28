@@ -33,6 +33,12 @@ import { MicroorganismosComponent } from './pages/admin/microorganismos/microorg
 import { LocalizacionesComponent } from './pages/admin/localizaciones/localizaciones.component';
 import { IarepisComponent } from './pages/admin/iarepis/iarepis.component';
 import { PaasComponent } from './pages/admin/paas/paas.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { VigilanciasComponent } from './pages/usuario/vigilancias/vigilancias.component';
+import { DipsvigilanciasComponent } from './pages/usuario/vigilancias/dipsvigilancias/dipsvigilancias.component';
+import { ProcedimientosvigilanciasComponent } from './pages/usuario/vigilancias/procedimientosvigilancias/procedimientosvigilancias.component';
+import { IarepisvigilanciasComponent } from './pages/usuario/vigilancias/iarepisvigilancias/iarepisvigilancias.component';
+import { PaavigilanciasComponent } from './pages/usuario/vigilancias/paavigilancias/paavigilancias.component';
 
 
 
@@ -52,6 +58,11 @@ import { PaasComponent } from './pages/admin/paas/paas.component';
     LocalizacionesComponent,
     IarepisComponent,
     PaasComponent,
+    VigilanciasComponent,
+    DipsvigilanciasComponent,
+    ProcedimientosvigilanciasComponent,
+    IarepisvigilanciasComponent,
+    PaavigilanciasComponent,
 
 
   ],
@@ -77,7 +88,7 @@ import { PaasComponent } from './pages/admin/paas/paas.component';
     CalendarModule,
     DropdownModule,
     MultiSelectModule,
-
+    TooltipModule
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

@@ -22,8 +22,8 @@ export class PacientesComponent implements OnInit {
   paciente !: PacienteInterface;
   datePipe : DatePipe = new DatePipe('en-US');
   nuevoPacienteForm = this.fb.group({
-    rut: ['', [Validators.required, Validators.minLength(6)]],
-    nombre: [{value: '', disabled: this.valido ? 'true':'false' }, [  Validators.required, Validators.minLength(6)]],
+    rut: ['', ],
+    nombre: [{value: '', disabled: true }, [  Validators.required, Validators.minLength(6)]],
     segundo_nombre: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
     apellido_paterno: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
     apellido_materno: [{value: '', disabled: true}, [Validators.required, Validators.minLength(6)]],
@@ -114,13 +114,29 @@ export class PacientesComponent implements OnInit {
     }, 1000);
   }
 
+  formatearRut(rutPaciente : string): string{
+    let rut = rutPaciente;
+    //Despejamos puntos
+    rut = rut.replace(/\./g, '');
+    //Despejamos guion
+    rut = rut.replace('-','');
+
+    //Aislamos cuerpo y digito verificador
+    let cuerpo = rut.slice(0,-1); // -1 hace referencia al ultimo digito
+    let dv = rut.slice(-1).toUpperCase();
+
+    rut = cuerpo + '-' + dv;
+    return rut ;
+  }
+
 
   // AGREGAR PACIENTE
   onSubmit () : void {
 
 
-    this.paciente = this.nuevoPacienteForm.value;
-
+    this.paciente = this.nuevoPacienteForm.getRawValue();
+    this.paciente.rut = this.formatearRut(this.paciente.rut);
+    console.log(this.paciente.rut);
 
     this.paciente.fecha_nacimiento = this.datePipe.transform(this.paciente.fecha_nacimiento, 'yyyy-MM-dd')!;
     this.paciente.fecha_hospitalizacion = this.datePipe.transform(this.paciente.fecha_hospitalizacion, 'dd-MM-yyyy, h:mm a')!;

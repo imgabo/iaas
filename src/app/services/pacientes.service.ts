@@ -17,7 +17,12 @@ export class PacientesService {
     return this.http.get<any>(this.pacientesURL);
   }
 
-  //crear paciente 
+  //obtener paciente por id
+  getPaciente(id : string) : Observable<any> {
+    return this.http.get<any>(`${this.pacientesURL}${id}`);
+  }
+
+  //crear paciente
   create(paciente : PacienteInterface):Observable<any>{
 
     return this.http.post<any>(`${this.pacientesURL}${'nuevo'}`,paciente);

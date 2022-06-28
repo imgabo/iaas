@@ -11,6 +11,7 @@ import { ServiciosComponent } from '../admin/servicios/servicios.component';
 import { TipoHeridasComponent } from '../admin/tipo-heridas/tipo-heridas.component';
 import { UserlistComponent } from '../admin/userlist/userlist.component';
 import { PacientesComponent } from '../usuario/pacientes/pacientes.component';
+import { VigilanciasComponent } from '../usuario/vigilancias/vigilancias.component';
 import { HomeComponent } from './home.component';
 
 const routes: Routes = [{
@@ -63,6 +64,11 @@ const routes: Routes = [{
 {
   path: 'paas',
   component: PaasComponent
+},
+
+{
+  path: 'vigilancia/:id',
+  component: VigilanciasComponent
 },
 
 
