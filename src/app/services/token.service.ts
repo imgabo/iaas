@@ -26,6 +26,30 @@ export class TokenService {
     return  localStorage.getItem('token')!;
   }
 
+  getUser() : string {
+    if(!this.isLogged){
+      return '';
+    }
+    const token = this.getToken();
+    const payload = token.split('.')[1];
+    const values = atob(payload);
+    const valuesJson = JSON.parse(values);
+    return valuesJson;
+  }
+
+  getId() : string {
+    if(!this.isLogged){
+      return '';
+    }
+    const token = this.getToken();
+    const payload =token.split('.')[1];
+    const values = atob(payload);
+    const valuesJson = JSON.parse(values);
+    const id = valuesJson.id;
+
+    return id;
+  }
+
   getNombreUsuario(): string{
     if(!this.isLogged){
       return '';
@@ -36,7 +60,6 @@ export class TokenService {
     const valuesJson = JSON.parse(values);
     const nombreUsuario = valuesJson.nombreUsuario;
     return nombreUsuario;
-
   }
 
   logOut() :void {

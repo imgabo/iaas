@@ -136,7 +136,7 @@ export class PacientesComponent implements OnInit {
 
     this.paciente = this.nuevoPacienteForm.getRawValue();
     this.paciente.rut = this.formatearRut(this.paciente.rut);
-    console.log(this.paciente.rut);
+
 
     this.paciente.fecha_nacimiento = this.datePipe.transform(this.paciente.fecha_nacimiento, 'yyyy-MM-dd')!;
     this.paciente.fecha_hospitalizacion = this.datePipe.transform(this.paciente.fecha_hospitalizacion, 'dd-MM-yyyy, h:mm a')!;
@@ -145,7 +145,7 @@ export class PacientesComponent implements OnInit {
 
     this.pacienteSvc.create(this.paciente).subscribe({
       error: (e) =>
-         { console.log(e)
+         {
           this.toastrService.error(e.error.error, 'Advertencia', {
             timeOut: 3000,
             positionClass: 'toast-top-right',

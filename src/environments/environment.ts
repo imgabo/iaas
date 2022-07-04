@@ -14,7 +14,8 @@ export const environment = {
   localizacionesURL : 'http://localhost:8080/localizaciones/',
   iarepisURL : 'http://localhost:8080/iarepis/',
   paasURL : 'http://localhost:8080/paas/',
-  pacientesURL : 'http://localhost:8080/pacientes/'
+  pacientesURL : 'http://localhost:8080/pacientes/',
+  dipVigilanciasURL : 'http://localhost:8080/vigilancias-dips/'
 };
 
 /*

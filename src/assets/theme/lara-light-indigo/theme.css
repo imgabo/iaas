@@ -3760,7 +3760,8 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
   border-top-left-radius: 6px;
 }
 .p-panel .p-panel-header .p-panel-title {
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 21px;
 }
 .p-panel .p-panel-header .p-panel-header-icon {
   width: 2rem;

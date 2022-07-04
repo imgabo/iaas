@@ -15,8 +15,6 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {PasswordModule} from 'primeng/password';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
-import { TokenService } from './services/token.service';
 import { TableModule } from 'primeng/table';
 import { UserlistComponent } from './pages/admin/userlist/userlist.component';
 import { PacientesComponent } from './pages/usuario/pacientes/pacientes.component';
@@ -39,8 +37,11 @@ import { DipsvigilanciasComponent } from './pages/usuario/vigilancias/dipsvigila
 import { ProcedimientosvigilanciasComponent } from './pages/usuario/vigilancias/procedimientosvigilancias/procedimientosvigilancias.component';
 import { IarepisvigilanciasComponent } from './pages/usuario/vigilancias/iarepisvigilancias/iarepisvigilancias.component';
 import { PaavigilanciasComponent } from './pages/usuario/vigilancias/paavigilancias/paavigilancias.component';
-
-
+import {DialogModule} from 'primeng/dialog';
+import {SkeletonModule} from 'primeng/skeleton';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import {PanelModule} from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -88,9 +89,13 @@ import { PaavigilanciasComponent } from './pages/usuario/vigilancias/paavigilanc
     CalendarModule,
     DropdownModule,
     MultiSelectModule,
-    TooltipModule
+    TooltipModule,
+    DialogModule,
+    SkeletonModule,
+    ConfirmDialogModule,
+    PanelModule
   ],
-  providers: [MenuService],
+  providers: [MenuService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
