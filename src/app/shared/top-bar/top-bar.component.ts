@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MegaMenuItem } from 'primeng/api';
 import { AppComponent } from 'src/app/app.component';
 import { TokenService } from 'src/app/services/token.service';
@@ -11,7 +12,7 @@ import { TokenService } from 'src/app/services/token.service';
 export class TopBarComponent implements OnInit {
   items!: MegaMenuItem[];
   isLogged :boolean = false;
-  constructor(public appMain : AppComponent, private readonly tokenSvc : TokenService) { }
+  constructor(public appMain : AppComponent, private readonly tokenSvc : TokenService,private readonly router: Router) { }
 
   ngOnInit(): void {
     this.isLogged= this.tokenSvc.isLogged();
@@ -130,4 +131,8 @@ export class TopBarComponent implements OnInit {
   ]
   }
 
+  logout() : void {
+    this.tokenSvc.logOut();
+    this.router.navigate(['/sign-in']);
+  }
 }

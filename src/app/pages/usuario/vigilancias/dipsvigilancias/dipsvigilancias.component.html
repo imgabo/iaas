@@ -1,4 +1,6 @@
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+
+<!--AGREGAR VIGILANCIA!-->
 <p-dialog header="Agregar Vigilancia DIP" [modal]="true" [(visible)]="visible"  [style]="{width: '60vw', minWidth: '50vw', height: '38vw', minHeight: '38vw'}" >
   <hr>
   <form (ngSubmit)="onSubmit()" [formGroup]="nuevaVigilanciaDips">
@@ -52,10 +54,67 @@
     </p-footer>
   </form>
 </p-dialog>
+<!--AGREGAR VIGILANCIA!-->
+
+<!-- AGREGAR BITACORA!-->
+<p-dialog header="Bitacora" [modal]="true" [(visible)]="bitacoraVisible"  [style]="{width: '60vw', minWidth: '50vw', height: '38vw', minHeight: '38vw'}" >
+  <hr>
+
+    <p-timeline [value]="comentarios" align="alternate" styleClass="customized-timeline">
+
+      <span class="custom-marker shadow-2">
+        <i class="pi pi-comment"></i>
+      </span>
+
+      <ng-template pTemplate="content" let-comentario>
+
+        <p-card >
+          <ng-template pTemplate="title">
+            {{comentario.user.nombreUsuario | uppercase}}
+          </ng-template>
+
+          <ng-template pTemplate="subtitle">
+            {{comentario.createdAt | date:'medium'}}
+          </ng-template>
+
+          <ng-template pTemplate="content">
+           {{comentario.contenido}}
+          </ng-template>
 
 
+        </p-card>
+      </ng-template>
+    </p-timeline>
 
 
+  <p-footer>
+    <form (ngSubmit)="onSubmitBitacora()" [formGroup]="addBitacora">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5">
+          <span class="p-float-label col-12 md:col-12">
+            <textarea id="float-input"  [rows]="4" [cols]="30" [autoResize]="true" style="max-height : 10rem" pInputTextarea formControlName="contenido"></textarea>
+            <label for="float-input">Nueva Bitacora</label>
+          </span>
+          <div class="field col-12 md:col-6" style="display: none;">
+          <label htmlFor="created_by">ID USUARIO CREA</label>
+          <input pInputText id="created_by" formControlName="created_by" type="text" />
+          </div>
+          <div class="field col-12 md:col-6" style="display: none;">
+            <label htmlFor="id_dip">ID VIGILANCIA DIP</label>
+            <input pInputText id="id_dip" formControlName="id_dip" type="text" />
+          </div>
+          <div class="col-12 md:col-6 col-offset-3 flex align-content-center justify-content-center" >
+            <p-button [disabled]=" !addBitacora.valid"  type="submit" label="Agregar Bitacora" icon="pi pi-check" iconPos="right"
+            styleClass="p-button-success"></p-button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </p-footer>
+</p-dialog>
+
+<!-- AGREGAR BITACORA!-->
 <p-panel header="DIPS" [toggleable]="true" styleClass="mb-4" [collapsed]="true">
 
   <button class="mb-3" pButton type="button" label="Agregar DIP" (click)="mostrarDialogo()"></button>
@@ -86,16 +145,16 @@
         <td>
           {{dip.id}}
         </td>
-        <td>{{dip.fecha_instalacion}}</td>
+        <td>{{dip.fecha_instalacion | date}}</td>
         <td>{{dip.dias_exposicion}}</td>
-        <td>{{dip.fecha_retiro}}</td>
+        <td>{{dip.fecha_retiro  | date}}</td>
         <td>{{dip.dip.nombre}}</td>
         <td>{{dip.usuarioCreacion.nombre}}</td>
         <td>{{dip.usuarioRetira?.nombre}}</td>
 
         <td style="text-align: center ;">
-          <button pButton pRipple icon="pi pi-bars" pTooltip="Registrar Vigilancia" tooltipPosition="bottom"
-            class="p-button-rounded  p-button-text" [routerLink]="['/home/vigilancia', paciente.id]"></button>
+          <button pButton pRipple icon="pi pi-bars" pTooltip="Bitacora" tooltipPosition="bottom"
+            class="p-button-rounded  p-button-text" (click)="agregarBitacora(dip.id)"></button>
           <button pButton pRipple icon="pi pi-pencil" pTooltip="Editar Paciente" tooltipPosition="bottom"
             class="p-button-rounded p-button-success p-button-text"></button>
           <button pButton pRipple icon="pi pi-times" pTooltip="Eliminar Paciente" tooltipPosition="bottom"

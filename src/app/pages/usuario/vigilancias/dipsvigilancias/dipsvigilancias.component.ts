@@ -9,6 +9,7 @@ import { PacienteInterface } from '../../pacientes/models/paciente.interface';
 import { DipVigilancia } from './models/dipvigilancias.interface';
 
 import { ToastrService } from 'ngx-toastr';
+import { nuevoComentaripVigilanciaDIP } from './models/comentariodipvigilancias.interface';
 
 @Component({
   selector: 'app-dipsvigilancias',
@@ -23,8 +24,11 @@ export class DipsvigilanciasComponent implements OnInit {
   vigilanciaDIP !: DipVigilancia;
   vigilancias !: DipVigilancia[];
   localDbDIPS !: DipVigilancia[];
+  bitacoraVisible : boolean = false;
   totalRecordsDips !: number;
   dips !: Dip[];
+  comentario !: nuevoComentaripVigilanciaDIP;
+  comentarios !: nuevoComentaripVigilanciaDIP[];
 
   nuevaVigilanciaDips = this.fb.group({
     id_dip : ['', [Validators.required]],
@@ -33,6 +37,12 @@ export class DipsvigilanciasComponent implements OnInit {
     id_paciente : [''],
     id_usuarioCreacion : [''],
     id_usuarioRetira : ['']
+  })
+
+  addBitacora = this.fb.group ({
+    contenido : ['', [Validators.required]],
+    created_by : ['', [Validators.required]],
+    id_dip : ['', [Validators.required]]
   })
 
 
@@ -86,6 +96,7 @@ export class DipsvigilanciasComponent implements OnInit {
 
   mostrarDialogo() : void{ // funcion para mostrar la vista de agregar dip a paciente
     this.visible = true;
+
   }
 
   resetearFormulario () : void {
@@ -135,5 +146,48 @@ export class DipsvigilanciasComponent implements OnInit {
   }
 
 
+  // BITACORA FUNCIONES //
+  agregarBitacora(id : string) : void {
+    this.bitacoraVisible= true;
+    this.addBitacora.controls['created_by'].setValue(this.token);
+    this.addBitacora.controls['id_dip'].setValue(id.toString());
+    this.cargarBitacoras(id);
+  }
+
+
+  onSubmitBitacora() : void {
+    this.comentario = this.addBitacora.value;
+
+    this.vigilanciaDipSVC.agregarComentario(this.comentario).subscribe({
+      error: (e) => {
+        console.log(e)
+        this.toastrService.error(e.error.error, 'Advertencia', {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        });
+      },
+      complete: () => {
+        this.toastrService.success(
+          'Bitacora Ingresada',
+          'Advertencia',
+          {
+            timeOut: 3000,
+            progressBar: true,
+            positionClass: 'toast-top-right',
+          }
+        );
+        this.cargarBitacoras(this.comentario.id_vigilanciadips);
+        this.addBitacora.controls['contenido'].reset();
+      },
+    })
+  }
+
+  cargarBitacoras(id : string ) : void {
+    this.vigilanciaDipSVC.obtenerComentarios(id).subscribe((data) => {
+      this.comentarios = data;
+
+    })
+  }
+ // BITACORA FUNCIONES //
 
 }

@@ -42,7 +42,9 @@ import {SkeletonModule} from 'primeng/skeleton';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import {PanelModule} from 'primeng/panel';
-
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {TimelineModule} from 'primeng/timeline';
+import {CardModule} from 'primeng/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +95,10 @@ import {PanelModule} from 'primeng/panel';
     DialogModule,
     SkeletonModule,
     ConfirmDialogModule,
-    PanelModule
+    PanelModule,
+    InputTextareaModule,
+    TimelineModule,
+    CardModule
   ],
   providers: [MenuService,ConfirmationService],
   bootstrap: [AppComponent]
