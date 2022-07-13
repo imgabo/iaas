@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PacientesResolver } from 'src/app/resolvers/pacientes.resolver';
 import { DipComponent } from '../admin/dip/dip.component';
 import { IarepisComponent } from '../admin/iarepis/iarepis.component';
 import { LocalizacionesComponent } from '../admin/localizaciones/localizaciones.component';
@@ -28,7 +29,10 @@ const routes: Routes = [{
 },
 {
   path: 'pacientes',
-  component: PacientesComponent
+  component: PacientesComponent,
+  resolve: {
+    pacientes : PacientesResolver
+  }
 },
 {
   path: 'servicios',

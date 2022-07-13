@@ -45,6 +45,8 @@ import {PanelModule} from 'primeng/panel';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TimelineModule} from 'primeng/timeline';
 import {CardModule} from 'primeng/card';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import { BooleanPipePipe } from './shared/pipes/boolean-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +68,7 @@ import {CardModule} from 'primeng/card';
     ProcedimientosvigilanciasComponent,
     IarepisvigilanciasComponent,
     PaavigilanciasComponent,
+    BooleanPipePipe,
 
 
   ],
@@ -98,7 +101,8 @@ import {CardModule} from 'primeng/card';
     PanelModule,
     InputTextareaModule,
     TimelineModule,
-    CardModule
+    CardModule,
+    InputSwitchModule
   ],
   providers: [MenuService,ConfirmationService],
   bootstrap: [AppComponent]

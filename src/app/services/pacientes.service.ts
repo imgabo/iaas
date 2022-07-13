@@ -13,8 +13,8 @@ export class PacientesService {
   constructor(private readonly http : HttpClient) { }
 
   //obtener pacientes
-  getPacientes() : Observable<any> {
-    return this.http.get<any>(this.pacientesURL);
+  getPacientes(page : number , limit : number) : Observable<any> {
+    return this.http.get<any>(`${this.pacientesURL}`, {params : {page: page, limit : limit}});
   }
 
   //obtener paciente por id
@@ -26,5 +26,13 @@ export class PacientesService {
   create(paciente : PacienteInterface):Observable<any>{
 
     return this.http.post<any>(`${this.pacientesURL}${'nuevo'}`,paciente);
+  }
+
+  getDips(id : string, page : number , limit : number) : Observable<any>{
+    return this.http.get<any>(`${this.pacientesURL+'vigilancias-dips/'}${id}`, {params : {page: page, limit : limit}})
+  }
+
+  getProcedimientos(id : string , page : number , limit : number ) : Observable<any> {
+    return this.http.get<any>(`${this.pacientesURL+'vigilancias-procedimientos/'}${id}`, {params: {page : page, limit : limit}});
   }
 }

@@ -1,3 +1,55 @@
 <p-panel header="PAA" [toggleable]="true" styleClass="mb-4" [collapsed]="true">
-  <button pButton type="button" label="Agregar PAA" ></button>
+  <button pButton type="button" label="Agregar PAA" (click)="mostrarDialogo()"></button>
 </p-panel>
+
+
+
+<!--AGREGAR VIGILANCIA!-->
+<p-dialog header="Agregar PAA" [modal]="true" [(visible)]="visible"  [style]="{width: '60vw', minWidth: '50vw', height: '45vw', minHeight: '38vw'}" >
+  <hr>
+  <form >
+    <div class="grid">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5">
+          <div class="field col-12   ">
+            <label class="titulos" for="dip">PAA:</label>
+            <p-dropdown [options]="paas" optionValue="id" optionLabel="nombre" [filter]="true" filterBy="nombre"
+              [showClear]="true" placeholder="Seleccione uno" formControlName="id_paa">
+            </p-dropdown>
+          </div>
+
+          <div class="field col-12">
+            <label class="titulos" for="dias">Dias:</label>
+            <p-inputNumber  mode="decimal" [showButtons]="true" inputId="dias">
+            </p-inputNumber>
+          </div>
+
+          <div class="field col-12">
+            <label class="titulos" for="n_procedimiento">No. Procedimiento:</label>
+            <p-inputNumber  mode="decimal" [showButtons]="true" inputId="n_procedimiento">
+            </p-inputNumber>
+          </div>
+
+          <div class="field col-12">
+            <label class="titulos" for="fecha_vigilancia">Fecha Vigilancia:</label>
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_vigilancia">
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 ">
+            <label class="titulos " for="observaciones">Observaciones:</label>
+            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div class="col-12   ">
+        <p-button type="submit" label="Ingresar Dip" icon="pi pi-check" iconPos="right"
+          styleClass="p-button-success"></p-button>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
+<!--AGREGAR VIGILANCIA!-->

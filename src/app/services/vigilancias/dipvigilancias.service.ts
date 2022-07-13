@@ -17,10 +17,7 @@ export class DipvigilanciasService {
   addVigilanciaDip( dip : DipVigilancia) : Observable<any> {
     return this.http.post<any>(`${this.dipVigilanciasURL}${'nuevo'}`,dip)
   }
-  // obtener
-  getVigilancias( paciente : string) : Observable<any> {
-    return this.http.get<any>(`${this.dipVigilanciasURL}${paciente}`)
-  }
+
 
   agregarComentario( comentario : nuevoComentaripVigilanciaDIP) : Observable<any> {
     return this.http.post<any>(`${this.comentarioDipURL}${'nuevo'}`,comentario);

@@ -71,7 +71,7 @@
       <h5>Lista de Pacientes</h5>
       <hr>
       <p-table [value]="pacientes" [lazy]="true" (onLazyLoad)="cargarPacientes($event)" responsiveLayout="scroll"
-              dataKey="id" [paginator]="true" [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+              dataKey="id"  [totalRecords]="totalRecords" [rows]="rowsPerPage" [loading]="loading"  [paginator]="true"  [rowsPerPageOptions]="[10,25,50]" >
         <ng-template pTemplate="header" >
           <tr>
             <th>ID</th>

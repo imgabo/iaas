@@ -1,4 +1,231 @@
+
+
+
+
+
+
+<!--AGREGAR VIGILANCIA!-->
+<p-dialog header="Agregar Vigilancia Procedimiento Cirugia" [modal]="true" [(visible)]="visible"  [style]="{width: '80vw', minWidth: '50vw', height: '44vw', minHeight: '38vw'}" >
+  <hr>
+  <form [formGroup]="nuevaVigilanciaProcedimiento" (ngSubmit)="onSubmit()">
+    <div class="grid">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5"  >
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="id_procedimiento">Procedimiento:</label>
+            <p-dropdown [options]="procedimientos" optionValue="id"  optionLabel="nombre" [filter]="true" filterBy="nombre"
+              [showClear]="true" placeholder="Selecciona uno" formControlName="id_procedimiento">
+            </p-dropdown>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="fecha_operacion">Fecha Procedimiento:</label>
+            <p-calendar formControlName="fecha_operacion" dateFormat="dd/mm/yy" [showIcon]="true"
+            inputId="fecha_operacion">
+          </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="fecha_revision">Fecha Revision:</label>
+            <p-calendar formControlName="fecha_revision" dateFormat="dd/mm/yy" [showIcon]="true"
+            inputId="fecha_revision">
+          </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="id_herida">Tipo Herida:</label>
+            <p-dropdown [options]="heridas" optionValue="id"  optionLabel="nombre" [filter]="true" filterBy="nombre"
+              [showClear]="true" placeholder="Selecciona uno" formControlName="id_herida">
+            </p-dropdown>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="asa">Asa:</label>
+            <p-dropdown [options]="asas" optionValue="nombre"  optionLabel="nombre" [filter]="true" filterBy="nombre"
+              [showClear]="true" placeholder="Selecciona uno" formControlName="asa">
+            </p-dropdown>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label class="titulos" for="fecha_alta">Fecha Alta:</label>
+            <p-calendar formControlName="fecha_alta" dateFormat="dd/mm/yy" [showIcon]="true"
+            inputId="fecha_alta">
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-2 flex flex-column">
+            <label class="titulos flex justify-content-center" for="control_post">Control Post:</label>
+            <p-inputSwitch class="flex justify-content-center" formControlName="control_post"></p-inputSwitch>
+          </div>
+
+          <div class="field col-12 md:col-4 ">
+            <label class="titulos" for="fecha_control">Fecha Control:</label>
+            <p-calendar formControlName="fecha_control" dateFormat="dd/mm/yy" [showIcon]="true"
+            inputId="fecha_control">
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-3  flex  flex-column ">
+            <label class="titulos flex justify-content-center" for="antibioprofilaxis">Antibioprofilaxis:</label>
+            <p-inputSwitch class="flex justify-content-center" formControlName="antibioprofilaxis"></p-inputSwitch>
+          </div>
+
+          <div class="field col-12 md:col-3 ">
+            <label class="titulos " for="observacion">Observaciones:</label>
+            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="observacion" ></textarea>
+          </div>
+
+          <div class="field col-12 md:col-6" style="display: none ;">
+            <label htmlFor="id_paciente">ID PACIENTE</label>
+            <input pInputText id="id_paciente" formControlName="id_paciente" type="text" />
+          </div>
+          <div class="field col-12 md:col-6" style="display: none ;">
+            <label htmlFor="id_usuario">ID USUARIO</label>
+            <input pInputText id="id_usuario" formControlName="id_usuarioCreacion" type="text" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <p-footer>
+      <div class="col-12 flex justify-content-end">
+        <p-button type="submit" label="Ingresar Vigilancia" icon="pi pi-check" iconPos="right"
+          styleClass="p-button-success" [disabled]="!nuevaVigilanciaProcedimiento.valid"></p-button>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
+<!--AGREGAR VIGILANCIA!-->
+
+
+
 <p-panel header="PROCEDIMIENTOS Y CIRUGIAS" [toggleable]="true" styleClass="mb-4" [collapsed]="true">
 
-  <button pButton type="button" label="Agregar Procedimiento" ></button>
+  <button class="mb-3" pButton type="button" label="Agregar Procedimiento" (click)="mostrarDialogo()" ></button>
+  <ng-container *ngIf="dataSource; else loadingBlock ">
+    <p-table [value]="vigilancias" [lazy]="true" (onLazyLoad)="cargarVigilancias($event)" responsiveLayout="scroll"
+      dataKey="id" [paginator]="true" [rows]="rowsPerPage" [totalRecords]="totalRecords" [loading]="loading">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th pSortableColumn="fecha_operacion">Fecha Procedimiento:<p-sortIcon field="fecha_operacion"></p-sortIcon>
+          </th>
+          <th pSortableColumn="fecha_revision">Fecha Revision:<p-sortIcon field="fecha_revision"></p-sortIcon>
+          </th>
+          <th pSortableColumn="id_tipo_herida">Herida Operatoria:<p-sortIcon field="id_tipo_herida"></p-sortIcon>
+          </th>
+          <th pSortableColumn="asa">Asa:<p-sortIcon field="asa"></p-sortIcon>
+          </th>
+          <th pSortableColumn="fecha_alta">Fecha Alta: <p-sortIcon field="fecha_alta"></p-sortIcon>
+          </th>
+          <th pSortableColumn="control_post">Control postOP<p-sortIcon field="control_post"></p-sortIcon>
+          </th>
+          <th pSortableColumn="fecha_control">Fecha Control<p-sortIcon field="fecha_control"></p-sortIcon>
+          </th>
+          <th pSortableColumn="antibioprofilaxis">Antibioprofilaxis<p-sortIcon field="antibioprofilaxis"></p-sortIcon>
+          </th>
+          <th pSortableColumn="observacion">Observacion<p-sortIcon field="observacion"></p-sortIcon>
+          </th>
+          <th pSortableColumn="usuario">Usuario<p-sortIcon field="usuario"></p-sortIcon>
+          </th>
+          <th style="width: 11rem; text-align: center;">
+            Acciones
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-vigilancia>
+        <tr>
+          <td>
+            {{vigilancia.id}}
+          </td>
+          <td>{{vigilancia.fecha_operacion | date}}</td>
+          <td>{{vigilancia.fecha_revision | date}}</td>
+          <td>{{vigilancia.herida.nombre}}</td>
+          <td>{{vigilancia.asa}}</td>
+          <td>{{vigilancia.fecha_alta |date}}</td>
+          <td>{{vigilancia.control_post | booleanPipe}}</td>
+          <td>{{vigilancia.fecha_control | date}}</td>
+          <td>{{vigilancia.antibioprofilaxis | booleanPipe}}</td>
+          <td>{{vigilancia.observacion}}</td>
+          <td>{{vigilancia.usuarioCreacion?.nombreUsuario}}</td>
+          <td style="text-align: center ;">
+            <button pButton pRipple icon="pi pi-bars" pTooltip="Bitacora" tooltipPosition="bottom"
+              class="p-button-rounded  p-button-text" (click)="agregarBitacora(vigilancia.id)"></button>
+            <button pButton pRipple icon="pi pi-pencil" pTooltip="Editar Vigilancia" tooltipPosition="bottom"
+              class="p-button-rounded p-button-success p-button-text"></button>
+            <button pButton pRipple icon="pi pi-times" pTooltip="Eliminar Vigilancia" tooltipPosition="bottom"
+              class="p-button-rounded p-button-danger p-button-text"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+<ng-template #loadingBlock></ng-template>
 </p-panel>
+
+
+<!-- AGREGAR BITACORA -->
+<!-- AGREGAR BITACORA!-->
+<p-dialog header="Bitacora" [modal]="true" [(visible)]="bitacoraVisible"  [style]="{width: '60vw', minWidth: '50vw', height: '38vw', minHeight: '38vw'}" >
+  <hr>
+
+    <p-timeline [value]="comentarios" align="alternate" styleClass="customized-timeline">
+
+      <span class="custom-marker shadow-2">
+        <i class="pi pi-comment"></i>
+      </span>
+
+      <ng-template pTemplate="content" let-comentario>
+
+        <p-card >
+          <ng-template pTemplate="title">
+            {{comentario.user.nombreUsuario | uppercase}}
+          </ng-template>
+
+          <ng-template pTemplate="subtitle">
+            {{comentario.createdAt | date:'medium'}}
+          </ng-template>
+
+          <ng-template pTemplate="content">
+           {{comentario.contenido}}
+          </ng-template>
+
+
+        </p-card>
+      </ng-template>
+    </p-timeline>
+
+
+  <p-footer>
+    <form (ngSubmit)="onSubmitBitacora()" [formGroup]="addBitacora">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5">
+          <span class="p-float-label col-12 md:col-12">
+            <textarea id="float-input"  [rows]="4" [cols]="30" [autoResize]="true" style="max-height : 10rem" pInputTextarea formControlName="contenido"></textarea>
+            <label for="float-input">Nueva Bitacora</label>
+          </span>
+          <div class="field col-12 md:col-6" style="display: none;">
+          <label htmlFor="created_by">ID USUARIO CREA</label>
+          <input pInputText id="created_by" formControlName="created_by" type="text" />
+          </div>
+          <div class="field col-12 md:col-6" style="display: none;">
+            <label htmlFor="id_procedimiento">ID VIGILANCIA DIP</label>
+            <input pInputText id="id_procedimiento" formControlName="id_procedimiento" type="text" />
+          </div>
+          <div class="col-12 md:col-6 col-offset-3 flex align-content-center justify-content-center" >
+            <p-button [disabled]=" !addBitacora.valid"  type="submit" label="Agregar Bitacora" icon="pi pi-check" iconPos="right"
+            styleClass="p-button-success"></p-button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </p-footer>
+</p-dialog>
+<!-- AGREGAR BITACORA!-->
+
+<!-- AGREGAR BITACORA -->
+

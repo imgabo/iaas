@@ -10,6 +10,8 @@ import { DipVigilancia } from './models/dipvigilancias.interface';
 
 import { ToastrService } from 'ngx-toastr';
 import { nuevoComentaripVigilanciaDIP } from './models/comentariodipvigilancias.interface';
+import { PacientesService } from 'src/app/services/pacientes.service';
+import { dipVigilanciasPagination } from './models/dipVigilanciasPagination.model';
 
 @Component({
   selector: 'app-dipsvigilancias',
@@ -23,10 +25,14 @@ export class DipsvigilanciasComponent implements OnInit {
   loading : boolean = false; // lazy loading del selector de dips
   vigilanciaDIP !: DipVigilancia;
   vigilancias !: DipVigilancia[];
-  localDbDIPS !: DipVigilancia[];
+
   bitacoraVisible : boolean = false;
-  totalRecordsDips !: number;
+  currentPage !: number;
+  rowsPerPage !: number;
+  totalRecords !: number;
   dips !: Dip[];
+
+  dataSource !: dipVigilanciasPagination;
   comentario !: nuevoComentaripVigilanciaDIP;
   comentarios !: nuevoComentaripVigilanciaDIP[];
 
@@ -52,6 +58,7 @@ export class DipsvigilanciasComponent implements OnInit {
     private readonly dipsSvc : DipService,
     private readonly tokenSvc : TokenService,
     private readonly toastrService: ToastrService,
+    private readonly pacienteSVC : PacientesService,
     private readonly vigilanciaDipSVC : DipvigilanciasService,
     private readonly ConfirmationService : ConfirmationService,
     ) { }
@@ -65,34 +72,48 @@ export class DipsvigilanciasComponent implements OnInit {
     this.dipsSvc.getDips().subscribe((data) =>{
       this.dips = data;
     })
-
-    this.cargarVigilancias(this.paciente.id);
-
+    this.reloadTable(this.paciente.id, 1, 10)
     this.nuevaVigilanciaDips.controls['id_usuarioCreacion'].setValue(this.token);
 
     this.nuevaVigilanciaDips.controls['id_paciente'].setValue(this.paciente.id);
   }
 
 
-  cargarVigilancias(paciente : string) : void {
-    this.vigilanciaDipSVC.getVigilancias(paciente).subscribe((data) => {
-      this.localDbDIPS = data;
-      this.totalRecordsDips = data.length;
+  prepareDataSource() : void {
+    if (this.dataSource) {
+      this.rowsPerPage = this.dataSource.meta.itemsPerPage
+      this.totalRecords = this.dataSource.meta.totalItems;
+
+      this.vigilancias = this.dataSource.items;
+      this.loading = false
+    }
+
+  }
+
+  cargarVigilancias(event: LazyLoadEvent) : void {
+
+    if(event.first !== undefined && event.rows !== undefined){
+      this.currentPage = (event.first / event.rows) + 1;
+      this.rowsPerPage = event.rows;
+
+    }
+    this.reloadTable(this.paciente.id, this.currentPage , this.rowsPerPage)
+
+  }
+
+
+
+  reloadTable(paciente : string , currentPage : number , rowsPerPage : number) : void {
+    this.loading = true
+    this.pacienteSVC.getDips(paciente, currentPage, rowsPerPage).subscribe({
+      next: (data : dipVigilanciasPagination) => {
+
+        this.dataSource = data;
+        this.prepareDataSource();
+      }
     })
   }
 
-  cargarDips(event : LazyLoadEvent){
-    this.loading = true;
-    setTimeout(() =>{
-      if(this.localDbDIPS){
-        if (event.first !== undefined && event.rows !== undefined){
-          this.vigilancias = this.localDbDIPS.slice(event.first, (event.first + event.rows));
-        }
-
-        this.loading=false
-      }
-    }, 1000);
-  }
 
   mostrarDialogo() : void{ // funcion para mostrar la vista de agregar dip a paciente
     this.visible = true;
@@ -118,13 +139,14 @@ export class DipsvigilanciasComponent implements OnInit {
       accept: () => {
         this.vigilanciaDipSVC.addVigilanciaDip(this.vigilanciaDIP).subscribe({
           error: (e) => {
-            console.log(e)
+
             this.toastrService.error(e.error.error, 'Advertencia', {
               timeOut: 3000,
               positionClass: 'toast-top-right',
             });
           },
           complete: () => {
+            this.reloadTable(this.paciente.id,this.currentPage , this.rowsPerPage)
             this.resetearFormulario();
             this.toastrService.success(
               'DIP Ingresado',
@@ -141,7 +163,7 @@ export class DipsvigilanciasComponent implements OnInit {
       reject: () => {
         this.resetearFormulario();
       }
-  });
+    });
 
   }
 
@@ -160,7 +182,7 @@ export class DipsvigilanciasComponent implements OnInit {
 
     this.vigilanciaDipSVC.agregarComentario(this.comentario).subscribe({
       error: (e) => {
-        console.log(e)
+
         this.toastrService.error(e.error.error, 'Advertencia', {
           timeOut: 3000,
           positionClass: 'toast-top-right',
@@ -176,16 +198,17 @@ export class DipsvigilanciasComponent implements OnInit {
             positionClass: 'toast-top-right',
           }
         );
-        this.cargarBitacoras(this.comentario.id_vigilanciadips);
+
+        this.cargarBitacoras(this.comentario.id_dip);
         this.addBitacora.controls['contenido'].reset();
       },
     })
   }
 
   cargarBitacoras(id : string ) : void {
+
     this.vigilanciaDipSVC.obtenerComentarios(id).subscribe((data) => {
       this.comentarios = data;
-
     })
   }
  // BITACORA FUNCIONES //

@@ -1,4 +1,52 @@
 <p-panel header="IAREPI" [toggleable]="true" styleClass="mb-4" [collapsed]="true">
 
-  <button pButton type="button" label="Agregar IAREPI" ></button>
+  <button pButton type="button" label="Agregar IAREPI" (click)="mostrarDialogo()" ></button>
 </p-panel>
+
+
+
+<!--AGREGAR VIGILANCIA!-->
+<p-dialog header="Agregar IAREPI" [modal]="true" [(visible)]="visible"  [style]="{width: '60vw', minWidth: '50vw', height: '45vw', minHeight: '38vw'}" >
+  <hr>
+  <form >
+    <div class="grid">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5">
+          <div class="field col-12   ">
+            <label class="titulos" for="dip">IAREPI:</label>
+            <p-dropdown [options]="iarepis" optionValue="id" optionLabel="nombre" [filter]="true" filterBy="nombre"
+              [showClear]="true" placeholder="Selecciona una" formControlName="id_iarepi">
+            </p-dropdown>
+          </div>
+          <div class="field col-12">
+            <label class="titulos" for="fecha_cultivo">Fecha Cultivo:</label>
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_cultivo">
+            </p-calendar>
+          </div>
+          <div class="field col-12">
+            <label class="titulos" for="fecha_aviso_lab">Fecha Aviso Lab:</label>
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_aviso_lab">
+            </p-calendar>
+          </div>
+          <div class="field col-12">
+            <label class="titulos" for="fecha_vigilancia">Fecha Vigilancia:</label>
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_vigilancia">
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 ">
+            <label class="titulos " for="observaciones">Observaciones:</label>
+            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div class="col-12   ">
+        <p-button type="submit" label="Ingresar Dip" icon="pi pi-check" iconPos="right"
+          styleClass="p-button-success"></p-button>
+      </div>
+    </p-footer>
+  </form>
+</p-dialog>
+<!--AGREGAR VIGILANCIA!-->

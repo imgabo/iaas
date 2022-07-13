@@ -10,6 +10,8 @@ import { PacienteInterface } from './models/paciente.interface';
 import { LazyLoadEvent } from 'primeng/api';
 
 import * as FileSaver from 'file-saver';
+import { PacientesPagination } from './models/pacientesPagination.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -38,9 +40,12 @@ export class PacientesComponent implements OnInit {
   loading!: boolean;
   pacientes !: PacienteInterface[];
   servicios!: any[];
-  localDB !: PacienteInterface[];
+  currentPage !: number;
+  rowsPerPage !: number;
   totalRecords !: number;
+  dataSource !: PacientesPagination;
   constructor(
+    private route : ActivatedRoute,
     private readonly fb: FormBuilder,
     private readonly servicioSvc: ServiciosService,
     private readonly pacienteSvc : PacientesService,
@@ -49,12 +54,19 @@ export class PacientesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pacienteSvc.getPacientes().subscribe((data) =>{
-      this.localDB = data;
-      this.totalRecords = data.length;
-    })
-
+    this.dataSource = this.route.snapshot.data['pacientes'];
+    this.prepareDataSource();
     this.cargarServicios();
+  }
+
+  prepareDataSource() : void {
+    if (this.dataSource) {
+      this.rowsPerPage = this.dataSource.meta.itemsPerPage
+      this.totalRecords = this.dataSource.meta.totalItems;
+
+      this.pacientes = this.dataSource.items;
+      this.loading = false
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -101,17 +113,28 @@ export class PacientesComponent implements OnInit {
   }
 
 
-  cargarPacientes(event : LazyLoadEvent){
-    this.loading = true;
-    setTimeout(() =>{
-      if(this.localDB){
-        if (event.first !== undefined && event.rows !== undefined){
-          this.pacientes = this.localDB.slice(event.first, (event.first + event.rows));
-        }
+  cargarPacientes(event : LazyLoadEvent): void{
 
-        this.loading=false
+    if(event.first !== undefined && event.rows !== undefined){
+      this.currentPage = (event.first / event.rows) + 1;
+      this.rowsPerPage = event.rows;
+
+    }
+    this.reloadTable(this.currentPage , this.rowsPerPage)
+
+  }
+
+  reloadTable(currentPage : number , rowsPerPage : number) : void {
+    this.loading = true
+    this.pacienteSvc.getPacientes(currentPage, rowsPerPage).subscribe({
+      next: (data : PacientesPagination) => {
+
+        this.dataSource = data;
+
+        this.prepareDataSource();
+
       }
-    }, 1000);
+    })
   }
 
   formatearRut(rutPaciente : string): string{
@@ -161,6 +184,7 @@ export class PacientesComponent implements OnInit {
               positionClass: 'toast-top-right',
             }
           );
+          this.reloadTable(this.currentPage, this.rowsPerPage);
         },
     })
   }
