@@ -15,7 +15,10 @@ export const environment = {
   iarepisURL : 'http://localhost:8080/iarepis/',
   paasURL : 'http://localhost:8080/paas/',
   pacientesURL : 'http://localhost:8080/pacientes/',
-  dipVigilanciasURL : 'http://localhost:8080/vigilancias-dips/'
+  dipVigilanciasURL : 'http://localhost:8080/vigilancias-dips/',
+  comentarioDipURL : 'http://localhost:8080/comentariosdips/',
+  procedimientosVigilanciasURL : 'http://localhost:8080/vigilanciacirugias/',
+  comentarioProcedimientosURL : 'http://localhost:8080/comentarioscirugias/'
 };
 
 /*

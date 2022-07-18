@@ -18,7 +18,11 @@ export const environment = {
   dipVigilanciasURL : 'http://localhost:8080/vigilancias-dips/',
   comentarioDipURL : 'http://localhost:8080/comentariosdips/',
   procedimientosVigilanciasURL : 'http://localhost:8080/vigilanciacirugias/',
-  comentarioProcedimientosURL : 'http://localhost:8080/comentarioscirugias/'
+  comentarioProcedimientosURL : 'http://localhost:8080/comentarioscirugias/',
+  iarepisVigilanciasURL : 'http://localhost:8080/vigilancias-iarepis/',
+  comentarioIarepisURL : 'http://localhost:8080/comentariosiarepis/',
+  paasVigilanciasURL : 'http://localhost:8080/vigilancias-paas/',
+  comentarioPaasURL : 'http://localhost:8080/comentariospaas/',
 };
 
 /*

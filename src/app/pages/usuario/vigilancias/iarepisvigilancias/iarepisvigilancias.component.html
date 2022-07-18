@@ -1,42 +1,101 @@
 <p-panel header="IAREPI" [toggleable]="true" styleClass="mb-4" [collapsed]="true">
 
-  <button pButton type="button" label="Agregar IAREPI" (click)="mostrarDialogo()" ></button>
+  <button pButton type="button" class="mb-3" label="Agregar IAREPI" (click)="mostrarDialogo()" ></button>
+
+
+
+  <ng-container *ngIf="dataSource; else loadingBlock ">
+    <p-table [value]="vigilancias" [lazy]="true" (onLazyLoad)="cargarVigilancias($event)" responsiveLayout="scroll"
+      dataKey="id" [paginator]="true" [rows]="rowsPerPage" [totalRecords]="totalRecords" [loading]="loading">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th pSortableColumn="fecha_cultivo">Fecha Cultivo:<p-sortIcon field="fecha_cultivo"></p-sortIcon>
+          </th>
+          <th pSortableColumn="fecha_aviso_lab">Fecha Aviso Lab:<p-sortIcon field="fecha_aviso_lab"></p-sortIcon>
+          </th>
+          <th pSortableColumn="fecha_vigilancia">Fecha iarepis:<p-sortIcon field="fecha_vigilancia"></p-sortIcon>
+          </th>
+          <th pSortableColumn="iarepis">Iarepis: <p-sortIcon field="iarepis"></p-sortIcon>
+          </th>
+          <th pSortableColumn="usuario_creacion">Usuario Creacion:<p-sortIcon field="usuario_creacion"></p-sortIcon>
+          </th>
+          <th pSortableColumn="observaciones">Observaciones:<p-sortIcon field="observaciones"></p-sortIcon>
+          </th>
+          <th style="width: 11rem; text-align: center;">
+            Acciones
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-iarepis>
+        <tr>
+          <td>
+            {{iarepis.id}}
+          </td>
+          <td>{{iarepis.fecha_cultivo | date}}</td>
+          <td>{{iarepis.fecha_aviso_lab | date}}</td>
+          <td>{{iarepis.fecha_vigilancia| date}}</td>
+          <td>{{iarepis.iarepis.nombre}}</td>
+          <td>{{iarepis.usuarioCreacion?.nombreUsuario}}</td>
+          <td>{{iarepis.observaciones}}</td>
+          <td style="text-align: center ;">
+            <button pButton pRipple icon="pi pi-bars" pTooltip="Bitacora" tooltipPosition="bottom"
+              class="p-button-rounded  p-button-text" (click)="agregarBitacora(iarepis.id)"></button>
+            <button pButton pRipple icon="pi pi-pencil" pTooltip="Editar iarepis" tooltipPosition="bottom"
+              class="p-button-rounded p-button-success p-button-text"></button>
+            <button pButton pRipple icon="pi pi-times" pTooltip="Eliminar iarepis" tooltipPosition="bottom"
+              class="p-button-rounded p-button-danger p-button-text"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+  <ng-template #loadingBlock></ng-template>
 </p-panel>
 
 
 
-<!--AGREGAR VIGILANCIA!-->
+<!--AGREGAR iarepis!-->
 <p-dialog header="Agregar IAREPI" [modal]="true" [(visible)]="visible"  [style]="{width: '60vw', minWidth: '50vw', height: '45vw', minHeight: '38vw'}" >
   <hr>
-  <form >
+  <form [formGroup]="nuevaVigilanciaIarepis" (ngSubmit)="onSubmit()" >
     <div class="grid">
       <div class="col-12">
         <div class="p-fluid p-formgrid grid mt-5">
           <div class="field col-12   ">
             <label class="titulos" for="dip">IAREPI:</label>
             <p-dropdown [options]="iarepis" optionValue="id" optionLabel="nombre" [filter]="true" filterBy="nombre"
-              [showClear]="true" placeholder="Selecciona una" formControlName="id_iarepi">
+              [showClear]="true" placeholder="Selecciona una" formControlName="id_iarepis">
             </p-dropdown>
           </div>
           <div class="field col-12">
             <label class="titulos" for="fecha_cultivo">Fecha Cultivo:</label>
-            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_cultivo">
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_cultivo" formControlName="fecha_cultivo">
             </p-calendar>
           </div>
           <div class="field col-12">
             <label class="titulos" for="fecha_aviso_lab">Fecha Aviso Lab:</label>
-            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_aviso_lab">
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_aviso_lab" formControlName="fecha_aviso_lab">
             </p-calendar>
           </div>
           <div class="field col-12">
-            <label class="titulos" for="fecha_vigilancia">Fecha Vigilancia:</label>
-            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_vigilancia">
+            <label class="titulos" for="fecha_vigilancia">Fecha iarepis:</label>
+            <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" inputId="fecha_vigilancia" formControlName="fecha_vigilancia">
             </p-calendar>
           </div>
 
           <div class="field col-12 ">
             <label class="titulos " for="observaciones">Observaciones:</label>
-            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" formControlName="observaciones"></textarea>
+          </div>
+
+          <div class="field col-12 md:col-6" style="display: none ;">
+            <label htmlFor="id_paciente">ID PACIENTE</label>
+            <input pInputText id="id_paciente" formControlName="id_paciente" type="text" />
+          </div>
+          <div class="field col-12 md:col-6" style="display: none ;">
+            <label htmlFor="id_usuario">ID USUARIO</label>
+            <input pInputText id="id_usuario" formControlName="id_usuarioCreacion" type="text" />
           </div>
         </div>
       </div>
@@ -44,9 +103,68 @@
     <p-footer>
       <div class="col-12   ">
         <p-button type="submit" label="Ingresar Dip" icon="pi pi-check" iconPos="right"
-          styleClass="p-button-success"></p-button>
+          styleClass="p-button-success" [disabled]="!nuevaVigilanciaIarepis.valid"></p-button>
       </div>
     </p-footer>
   </form>
 </p-dialog>
-<!--AGREGAR VIGILANCIA!-->
+<!--AGREGAR iarepis!-->
+
+<!-- AGREGAR BITACORA!-->
+<p-dialog header="Bitacora" [modal]="true" [(visible)]="bitacoraVisible"  [style]="{width: '60vw', minWidth: '50vw', height: '38vw', minHeight: '38vw'}" >
+  <hr>
+
+    <p-timeline [value]="comentarios" align="alternate" styleClass="customized-timeline">
+
+      <span class="custom-marker shadow-2">
+        <i class="pi pi-comment"></i>
+      </span>
+
+      <ng-template pTemplate="content" let-comentario>
+
+        <p-card >
+          <ng-template pTemplate="title">
+            {{comentario.user.nombreUsuario | uppercase}}
+          </ng-template>
+
+          <ng-template pTemplate="subtitle">
+            {{comentario.createdAt | date:'medium'}}
+          </ng-template>
+
+          <ng-template pTemplate="content">
+           {{comentario.contenido}}
+          </ng-template>
+
+
+        </p-card>
+      </ng-template>
+    </p-timeline>
+
+
+  <p-footer>
+    <form (ngSubmit)="onSubmitBitacora()" [formGroup]="addBitacora">
+      <div class="col-12">
+        <div class="p-fluid p-formgrid grid mt-5">
+          <span class="p-float-label col-12 md:col-12">
+            <textarea id="float-input"  [rows]="4" [cols]="30" [autoResize]="true" style="max-height : 10rem" pInputTextarea formControlName="contenido"></textarea>
+            <label for="float-input">Nueva Bitacora</label>
+          </span>
+          <div class="field col-12 md:col-6" style="display: none;">
+          <label htmlFor="created_by">ID USUARIO CREA</label>
+          <input pInputText id="created_by" formControlName="created_by" type="text" />
+          </div>
+          <div class="field col-12 md:col-6" style="display: none;">
+            <label htmlFor="id_vigilancia_iarepis">ID IAREPIS </label>
+            <input pInputText id="id_vigilancia_iarepis" formControlName="id_vigilancia_iarepis" type="text" />
+          </div>
+          <div class="col-12 md:col-6 col-offset-3 flex align-content-center justify-content-center" >
+            <p-button [disabled]=" !addBitacora.valid"  type="submit" label="Agregar Bitacora" icon="pi pi-check" iconPos="right"
+            styleClass="p-button-success"></p-button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </p-footer>
+</p-dialog>
+<!-- AGREGAR BITACORA!-->

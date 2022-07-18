@@ -53,7 +53,7 @@ export class ProcedimientosvigilanciasComponent implements OnInit {
     fecha_alta : ['',[Validators.required]],
     control_post : [false],
     fecha_control : [''],
-    antibioprofilaxis : [true],
+    antibioprofilaxis : [false],
     observacion : [''],
     id_paciente : ['', [Validators.required]],
     id_usuarioCreacion : ['', [Validators.required]]
@@ -143,7 +143,7 @@ export class ProcedimientosvigilanciasComponent implements OnInit {
     this.procedimiento = this.nuevaVigilanciaProcedimiento.value;
 
     this.ConfirmationService.confirm({
-      message: 'Desea Registrar el DIP?',
+      message: 'Desea Registrar el Procedimiento?',
       header: 'Confirmacion',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -157,6 +157,7 @@ export class ProcedimientosvigilanciasComponent implements OnInit {
           },
           complete: () => {
             this.resetearFormulario();
+            this.reloadTable(this.paciente.id,this.currentPage , this.rowsPerPage)
             this.toastrService.success(
               'Vigilancia de Procedimiento de Cirugia Agregado',
               'Advertencia',

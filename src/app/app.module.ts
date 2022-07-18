@@ -47,6 +47,7 @@ import {TimelineModule} from 'primeng/timeline';
 import {CardModule} from 'primeng/card';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { BooleanPipePipe } from './shared/pipes/boolean-pipe.pipe';
+import { ComentariosComponent } from './pages/usuario/vigilancias/comentarios/comentarios.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { BooleanPipePipe } from './shared/pipes/boolean-pipe.pipe';
     IarepisvigilanciasComponent,
     PaavigilanciasComponent,
     BooleanPipePipe,
+    ComentariosComponent,
 
 
   ],

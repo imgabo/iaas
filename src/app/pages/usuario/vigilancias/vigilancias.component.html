@@ -6,8 +6,9 @@
     <ng-container *ngIf="paciente$ ">
       <app-dipsvigilancias [paciente] = "paciente$" [token] = "token" ></app-dipsvigilancias>
       <app-procedimientosvigilancias [paciente] = "paciente$" [token] = "token" ></app-procedimientosvigilancias>
-      <app-iarepisvigilancias></app-iarepisvigilancias>
-      <app-paavigilancias></app-paavigilancias>
+      <app-iarepisvigilancias [paciente] = "paciente$" [token] = "token" ></app-iarepisvigilancias>
+      <app-paavigilancias [paciente] = "paciente$" [token] = "token" ></app-paavigilancias>
+      <app-comentarios [paciente] = "paciente$" [token] = "token" ></app-comentarios>
     </ng-container>
   </div>
 </div>

@@ -1,0 +1,52 @@
+<p-panel header="GENERAL" [toggleable]="true" styleClass="mb-4" [collapsed]="false">
+  <form (ngSubmit)="onSubmitComentario()" [formGroup]="addComentario">
+    <div class="col-12 mb-5">
+      <div class="p-fluid p-formgrid grid mt-5">
+        <span class="p-float-label col-12 md:col-12">
+          <textarea id="float-input"  [rows]="4" [cols]="30" [autoResize]="true" style="max-height : 10rem" pInputTextarea formControlName="contenido"></textarea>
+          <label for="float-input">OBSERVACION:</label>
+        </span>
+        <div class="field col-12 md:col-6" style="display: none;">
+        <label htmlFor="created_by">ID USUARIO CREA</label>
+        <input pInputText id="created_by" formControlName="created_by" type="text" />
+        </div>
+        <div class="field col-12 md:col-6" style="display: none;">
+          <label htmlFor="id_paciente">ID VIGILANCIA DIP</label>
+          <input pInputText id="id_paciente" formControlName="id_paciente" type="text" />
+        </div>
+        <div class="col-12 md:col-3 md:col-offset-9" >
+          <p-button [disabled]=" !addComentario.valid"  type="submit" label="Agregar Bitacora" icon="pi pi-check" iconPos="right"
+          styleClass="p-button-success"></p-button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <p-timeline [value]="comentarios" align="alternate" styleClass="customized-timeline">
+    <ng-template pTemplate="marker">
+      <span class="custom-marker shadow-2" style="background-color: #6366F1 ;">
+        <i class="pi pi-user"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="content" let-comentario>
+
+      <p-card >
+        <ng-template pTemplate="title">
+          {{comentario.user.nombreUsuario | uppercase}}
+        </ng-template>
+
+        <ng-template pTemplate="subtitle">
+          {{comentario.createdAt | date:'medium'}}
+        </ng-template>
+
+        <ng-template pTemplate="content">
+         {{comentario.contenido}}
+        </ng-template>
+
+
+      </p-card>
+    </ng-template>
+  </p-timeline>
+
+</p-panel>
