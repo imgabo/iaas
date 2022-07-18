@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@auth0/angular-jwt": "^5.0.2",
-    "faker": "^6.6.6",
     "file-saver": "^2.0.5",
     "ngx-toastr": "^14.3.0",
     "primeflex": "^3.2.1",
